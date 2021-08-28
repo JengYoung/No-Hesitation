@@ -1,0 +1,17 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
+  "extends": [
+    "eslint:recommended", 
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+  },
+  "plugins": ["prettier"],
+  "env": {
+    "browser": true
+  }
+}

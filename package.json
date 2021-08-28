@@ -1,0 +1,32 @@
+{
+  "type": "module",
+  "name": "no-hesitation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint": "^7.32.0",
+    "prettier": "^2.3.2",
+    "babel-eslint": "^10.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JengYoung/No-Hesitation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JengYoung/No-Hesitation/issues"
+  },
+  "homepage": "https://github.com/JengYoung/No-Hesitation#readme"
+}
