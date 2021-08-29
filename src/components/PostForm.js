@@ -4,7 +4,10 @@ import Input from './common/Input.js';
 
 export default function PostForm({
   $target,
-  initialState = { title: '', content: '' },
+  initialState = {
+    title: '',
+    content: '',
+  },
 }) {
   // 초기 컴포넌트를 DOM에 추가하고, 상태를 초기화합니다.
   const $editor = document.createElement('div');
@@ -34,7 +37,7 @@ export default function PostForm({
         title,
       };
       this.setState(nextState);
-      postTitle.setState(this.state.title);
+      postTitle.setState(title);
       debounce(savePost, 2000)('new', this.state);
     },
   });
@@ -53,7 +56,8 @@ export default function PostForm({
   };
 
   this.render = () => {
-    $postContent.value = this.state.content;
+    const { content } = this.state;
+    $postContent.value = content;
   };
 
   this.render();

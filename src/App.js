@@ -1,6 +1,5 @@
-import PostForm from './components/PostForm.js';
 import SideBar from './components/SideBar.js';
-import { getItem } from './utils/storage.js';
+import PostEditPage from './pages/PostEditPage.js';
 
 export default function App({ $target }) {
   new SideBar({
@@ -34,12 +33,15 @@ export default function App({ $target }) {
     },
   });
 
-  const { title, content } = getItem('new', { title: '', content: '' });
-  new PostForm({
+  const postEditPage = new PostEditPage({
     $target,
     initialState: {
-      title,
-      content,
+      postId: 'new',
+      postInfo: {
+        title: '',
+        content: '',
+      },
     },
   });
+  postEditPage.render();
 }
