@@ -13,6 +13,8 @@ export default function Header({ $target, headerSize, initialState = '' }) {
   };
 
   this.render = () => {
-    $header.textcontent = this.state;
+    $header.textContent = `${this.state}님, 안녕하세요!`;
   };
+
+  this.render();
 }
