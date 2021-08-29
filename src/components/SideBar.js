@@ -22,7 +22,9 @@ export default function SideBar({ $target, initialState }) {
 
   this.render = () => {
     const { documents } = this.state;
-    renderPosts($sideBar, documents);
+    const $fragment = new DocumentFragment();
+    renderPosts($fragment, documents);
+    $sideBar.appendChild($fragment);
   };
 
   this.render();

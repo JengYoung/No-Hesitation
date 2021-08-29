@@ -1,3 +1,4 @@
+import { getItem, setItem } from '../utils/storage.js';
 import Input from './common/Input.js';
 
 export default function PostForm({ $target, initialState }) {
@@ -26,6 +27,7 @@ export default function PostForm({ $target, initialState }) {
       };
       this.setState(nextState);
       postTitle.setState(this.state.title);
+      setItem('new', this.state);
     },
   });
 
@@ -38,12 +40,14 @@ export default function PostForm({ $target, initialState }) {
       ...nextState,
     };
 
+    setItem('new', this.state);
     this.render();
   };
 
   this.render = () => {
     $postContent.value = this.state.content;
   };
+
   this.render();
 
   $postContent.addEventListener('keyup', e => {

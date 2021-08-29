@@ -5,6 +5,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "dotenv": "^10.0.0"
   },
   "devDependencies": {
     "eslint-plugin-prettier": "^3.4.1",

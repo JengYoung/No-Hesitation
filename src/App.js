@@ -1,5 +1,6 @@
 import PostForm from './components/PostForm.js';
 import SideBar from './components/SideBar.js';
+import { getItem } from './utils/storage.js';
 
 export default function App({ $target }) {
   new SideBar({
@@ -33,11 +34,12 @@ export default function App({ $target }) {
     },
   });
 
+  const { title, content } = getItem('new', { title: '', content: '' });
   new PostForm({
     $target,
     initialState: {
-      title: '테스트합니다',
-      content: '테스트 중이에요!',
+      title,
+      content,
     },
   });
 }

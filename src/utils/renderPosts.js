@@ -6,7 +6,7 @@ export default function renderPosts($parentNode, nowDocuments) {
     $nowNode.dataset.id = id;
     $nowNode.textContent = title;
 
-    $parentNode.appendChild($nowNode);
     renderPosts($nowNode, nextDocs);
+    $parentNode.appendChild($nowNode);
   });
 }
