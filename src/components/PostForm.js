@@ -1,7 +1,11 @@
-import { getItem, setItem } from '../utils/storage.js';
+import debounce from '../utils/debounce.js';
+import { setItem } from '../utils/storage.js';
 import Input from './common/Input.js';
 
-export default function PostForm({ $target, initialState }) {
+export default function PostForm({
+  $target,
+  initialState = { title: '', content: '' },
+}) {
   // 초기 컴포넌트를 DOM에 추가하고, 상태를 초기화합니다.
   const $editor = document.createElement('div');
   $target.appendChild($editor);
@@ -14,9 +18,13 @@ export default function PostForm({ $target, initialState }) {
    */
   this.state = initialState;
 
-  /***************
-   *  component  *
-   ***************/
+  const savePost = (id = 'new', state = this.state) => {
+    setItem(id, state);
+  };
+
+  /*************************************
+   *            component              *
+   *************************************/
   const postTitle = new Input({
     $target: $editor,
     initialState: this.state.title,
@@ -27,7 +35,7 @@ export default function PostForm({ $target, initialState }) {
       };
       this.setState(nextState);
       postTitle.setState(this.state.title);
-      setItem('new', this.state);
+      debounce(savePost, 2000)('new', this.state);
     },
   });
 
@@ -40,7 +48,7 @@ export default function PostForm({ $target, initialState }) {
       ...nextState,
     };
 
-    setItem('new', this.state);
+    debounce(savePost, 2000)('new', this.state);
     this.render();
   };
 
