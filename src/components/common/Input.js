@@ -10,6 +10,6 @@ export default function Input({ $target, initialState, onChange }) {
   };
 
   $input.addEventListener('keyup', e => {
-    onChange($input.value);
+    onChange(e.target.value);
   });
 }

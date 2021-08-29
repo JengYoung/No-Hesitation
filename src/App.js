@@ -1,4 +1,4 @@
-import Editor from './components/Editor.js';
+import PostForm from './components/PostForm.js';
 import SideBar from './components/SideBar.js';
 
 export default function App({ $target }) {
@@ -33,7 +33,7 @@ export default function App({ $target }) {
     },
   });
 
-  new Editor({
+  new PostForm({
     $target,
     initialState: {
       title: '테스트합니다',

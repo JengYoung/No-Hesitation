@@ -1,6 +1,6 @@
 import Input from './common/Input.js';
 
-export default function PostEditor({ $target, initialState }) {
+export default function PostForm({ $target, initialState }) {
   // 초기 컴포넌트를 DOM에 추가하고, 상태를 초기화합니다.
   const $editor = document.createElement('div');
   $target.appendChild($editor);
@@ -20,7 +20,6 @@ export default function PostEditor({ $target, initialState }) {
     $target: $editor,
     initialState: this.state.title,
     onChange: title => {
-      console.log(title);
       const nextState = {
         ...this.state,
         title,
