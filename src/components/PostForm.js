@@ -1,5 +1,3 @@
-import debounce from '../utils/debounce.js';
-import { setItem } from '../utils/storage.js';
 import Input from './common/Input.js';
 
 export default function PostForm({
@@ -8,6 +6,7 @@ export default function PostForm({
     title: '',
     content: '',
   },
+  onEdit,
 }) {
   // 초기 컴포넌트를 DOM에 추가하고, 상태를 초기화합니다.
   const $editor = document.createElement('div');
@@ -20,10 +19,6 @@ export default function PostForm({
    * }
    */
   this.state = initialState;
-
-  const savePost = (id = 'new', state = this.state) => {
-    setItem(id, state);
-  };
 
   /*************************************
    *            component              *
@@ -38,7 +33,7 @@ export default function PostForm({
       };
       this.setState(nextState);
       postTitle.setState(title);
-      debounce(savePost, 2000)('new', this.state);
+      onEdit(this.state);
     },
   });
 
@@ -51,7 +46,6 @@ export default function PostForm({
       ...nextState,
     };
 
-    debounce(savePost, 2000)('new', this.state);
     this.render();
   };
 
@@ -67,5 +61,6 @@ export default function PostForm({
       ...this.state,
       content: e.target.value,
     });
+    onEdit({ ...this.state });
   });
 }

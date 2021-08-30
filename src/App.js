@@ -1,47 +1,34 @@
-import SideBar from './components/SideBar.js';
+import MainPage from './pages/MainPage.js';
 import PostEditPage from './pages/PostEditPage.js';
 
 export default function App({ $target }) {
-  new SideBar({
-    $target,
-    initialState: {
-      username: 'jengyoung',
-      documents: [
-        {
-          id: 1, // Document id
-          title: '노션을 만들자', // Document title
-          documents: [
-            {
-              id: 2,
-              title: '블라블라',
-              documents: [
-                {
-                  id: 3,
-                  title: '함냐함냐',
-                  documents: [],
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: 4,
-          title: 'hello!',
-          documents: [],
-        },
-      ],
-    },
-  });
-
   const postEditPage = new PostEditPage({
     $target,
     initialState: {
       postId: 'new',
-      postInfo: {
-        title: '',
-        content: '',
-      },
     },
   });
-  postEditPage.render();
+
+  const mainPage = new MainPage({
+    $target,
+    initialState: {
+      username: 'jengyoung',
+      documents: [],
+    },
+  });
+  this.route = () => {
+    while ($target.hasChildNodes()) {
+      $target.removeChild($target.firstChild);
+    }
+    const { pathname } = window.location;
+    const splitedPath = pathname.split('/');
+    if (pathname === '/') {
+      mainPage.setState();
+    } else if (pathname.indexOf('/posts/') === 0) {
+      const postId = pathname.split('/')[2];
+      postEditPage.setState({ postId });
+    }
+  };
+
+  this.route();
 }
