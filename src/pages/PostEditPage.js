@@ -13,6 +13,7 @@ export default function PostEditPage({
   const $page = new DocumentFragment();
   this.state = initialState;
   const { postId } = this.state;
+  console.log(postId);
 
   const defaultValue = { title: '', content: '' };
   const post = getItem(getLocalPostKey(postId), defaultValue);
@@ -23,13 +24,15 @@ export default function PostEditPage({
       ...post,
     },
     onEdit: post => {
-      debounce(setItem, 2000)(getLocalPostKey(postId), { ...post });
+      debounce(setItem, 2000)(getLocalPostKey(this.state.postId), { ...post });
     },
   });
 
   this.setState = nextState => {
     this.state = nextState;
-    const post = getItem(getLocalPostKey(postId), defaultValue);
+    console.log(this.state.postId);
+    const post = getItem(getLocalPostKey(this.state.postId), defaultValue);
+    console.log('POST', post);
     this.render();
     postForm.setState(post);
   };

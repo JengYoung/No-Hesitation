@@ -22,10 +22,12 @@ export default function App({ $target }) {
     }
     const { pathname } = window.location;
     const splitedPath = pathname.split('/');
+
     if (pathname === '/') {
       mainPage.setState();
     } else if (pathname.indexOf('/posts/') === 0) {
       const postId = pathname.split('/')[2];
+      console.log(postId);
       postEditPage.setState({ postId });
     }
   };
