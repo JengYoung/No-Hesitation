@@ -46,6 +46,7 @@ export default function PostEditPage({
           title,
           content,
         }),
+      5000,
     ),
   });
 

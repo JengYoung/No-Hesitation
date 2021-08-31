@@ -23,7 +23,6 @@ export const getItem = (key, defaultValue) => {
  */
 export const setItem = (key, value) => {
   try {
-    console.log('결과: ', key, value);
     storage.setItem(key, JSON.stringify(value));
   } catch (e) {
     console.error(e);

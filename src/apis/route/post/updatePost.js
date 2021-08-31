@@ -5,7 +5,6 @@ const updatePost = async (id, username, body) => {
   const nowContent = content ?? null;
   if (!nowTitle || !nowContent) return;
 
-  console.log(id, username, body);
   return await request(`/documents/${id}`, {
     options: {
       body: JSON.stringify(body),

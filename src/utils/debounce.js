@@ -3,7 +3,6 @@ export default function debounce(callback, delay) {
   return (...args) => {
     if (timer) clearTimeout(timer);
     timer = setTimeout(async () => {
-      console.log(args);
       await callback(...args);
     }, delay);
   };
