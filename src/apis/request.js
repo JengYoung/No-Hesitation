@@ -7,12 +7,15 @@ export const API_END_POINT = 'https://kdt.roto.codes';
  * @param {object} username: string, options: object
  * @returns promise
  */
-const request = async (url, { options = {}, headers }) => {
+const request = async (url, { options, header }) => {
   if (!(typeof url === 'string')) return;
   try {
     const res = await fetch(`${API_END_POINT}${url}`, {
       ...options,
-      headers,
+      headers: {
+        ...header,
+        'Content-Type': 'application/json',
+      },
     });
     if (res.ok) {
       return await res.json();

@@ -1,9 +1,10 @@
-let timer = null;
-export default function debounce(func, delay) {
+export default function debounce(callback, delay) {
+  let timer;
   return (...args) => {
-    if (timer !== null) clearTimeout(timer);
+    if (timer) clearTimeout(timer);
     timer = setTimeout(() => {
-      func(...args);
+      console.log(args);
+      callback(...args);
     }, delay);
   };
 }

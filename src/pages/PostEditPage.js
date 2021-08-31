@@ -35,9 +35,10 @@ export default function PostEditPage({
     initialState: {
       ...post,
     },
-    onEdit: post => {
-      debounce(setItem, 2000)(getLocalPostKey(this.state.id), { ...post });
-    },
+    onEdit: debounce(
+      post => setItem(getLocalPostKey(this.state.id), { ...post }),
+      2000,
+    ),
   });
 
   // id가 바뀔 때 페이지의 상태가 변화합니다!
