@@ -43,14 +43,13 @@ export default function PostForm({
     };
     const { content } = this.state;
     $postContent.value = content;
+    postTitle.setState(this.state.title);
   };
 
   this.render = () => {
     $editor.appendChild($postContent);
     $target.appendChild($editor);
   };
-
-  this.render();
 
   $postContent.addEventListener('keyup', e => {
     this.setState({

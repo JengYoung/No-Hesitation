@@ -1,26 +1,27 @@
-export default function request() {
-  return [
-    {
-      id: 1, // Document id
-      title: '노션을 만들자', // Document title
-      documents: [
-        {
-          id: 2,
-          title: '블라블라',
-          documents: [
-            {
-              id: 3,
-              title: '함냐함냐',
-              documents: [],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: 4,
-      title: 'hello!',
-      documents: [],
-    },
-  ];
-}
+import { ERROR_ETC } from '../utils/constants.js';
+
+export const API_END_POINT = 'https://kdt.roto.codes';
+
+/**
+ * @param {string} url
+ * @param {object} username: string, options: object
+ * @returns promise
+ */
+const request = async (url, { options = {}, headers }) => {
+  if (!(typeof url === 'string')) return;
+  try {
+    const res = await fetch(`${API_END_POINT}${url}`, {
+      ...options,
+      headers,
+    });
+    if (res.ok) {
+      return await res.json();
+    }
+
+    throw new Error(ERROR_ETC);
+  } catch (e) {
+    console.error(e);
+    alert(e.message);
+  }
+};
+export default request;

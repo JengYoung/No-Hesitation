@@ -1,4 +1,4 @@
-import request from '../apis/request.js';
+import getPostList from '../apis/route/post/getPostList.js';
 import Header from '../components/common/Header.js';
 import SideBar from '../components/SideBar.js';
 
@@ -16,7 +16,6 @@ export default function MainPage({
   this.state = initialState;
 
   const $page = new DocumentFragment();
-  // const $page = document.createElement('div');
   const sideBar = new SideBar({
     $target: $page,
     initialState,
@@ -31,8 +30,8 @@ export default function MainPage({
     },
   });
 
-  this.setState = () => {
-    const posts = request();
+  this.setState = async () => {
+    const posts = await getPostList(this.state.username);
     this.state = {
       ...this.state,
       documents: posts,

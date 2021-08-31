@@ -1,14 +1,20 @@
 import router from './apis/router.js';
 import MainPage from './pages/MainPage.js';
 import PostEditPage from './pages/PostEditPage.js';
-import { READ_POST_ROUTE } from '../src/utils/constants.js';
+import { ROUTE_POST } from '../src/utils/constants.js';
 import removeAllChildNodes from './utils/removeAllChildNodes.js';
 
 export default function App({ $target }) {
   const postEditPage = new PostEditPage({
     $target,
     initialState: {
-      postId: 'new',
+      username: 'jengyoung',
+      id: '',
+      title: '',
+      content: '',
+      documents: [],
+      createdAt: '',
+      updatedAt: '',
     },
   });
 
@@ -19,8 +25,7 @@ export default function App({ $target }) {
       documents: [],
     },
     onClick: id => {
-      console.log(READ_POST_ROUTE + `/${id}`);
-      history.pushState(null, null, READ_POST_ROUTE + `/${id}`);
+      history.pushState(null, null, ROUTE_POST + `/${id}`);
       this.route();
     },
   });
@@ -32,9 +37,9 @@ export default function App({ $target }) {
 
     if (pathname === undefined || pathname === '/') {
       mainPage.setState();
-    } else if (pathname.indexOf(READ_POST_ROUTE + '/') === 0) {
+    } else if (pathname.indexOf(ROUTE_POST + '/') === 0) {
       const postId = splitedPath[2];
-      postEditPage.setState({ postId });
+      postEditPage.setState({ id: postId });
     }
   };
 
