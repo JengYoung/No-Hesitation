@@ -9,9 +9,7 @@ export default function PostForm({
   onEdit,
 }) {
   // 초기 컴포넌트를 DOM에 추가하고, 상태를 초기화합니다.
-  const $editor = document.createElement('div');
-  $target.appendChild($editor);
-
+  const $editor = document.createElement('form');
   /*
    * this.state = {
    *   title: string
@@ -36,22 +34,20 @@ export default function PostForm({
       onEdit(this.state);
     },
   });
-
   const $postContent = document.createElement('textarea');
-  $editor.appendChild($postContent);
 
   this.setState = nextState => {
     this.state = {
       ...this.state,
       ...nextState,
     };
-
-    this.render();
+    const { content } = this.state;
+    $postContent.value = content;
   };
 
   this.render = () => {
-    const { content } = this.state;
-    $postContent.value = content;
+    $editor.appendChild($postContent);
+    $target.appendChild($editor);
   };
 
   this.render();

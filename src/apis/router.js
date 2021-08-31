@@ -7,6 +7,7 @@ export default function router(onRoute) {
 
     if (nextUrl) {
       history.pushState(null, null, nextUrl);
+      console.log('nextUrl', nextUrl);
       onRoute();
     }
   });

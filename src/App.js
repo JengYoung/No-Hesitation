@@ -19,6 +19,7 @@ export default function App({ $target }) {
       documents: [],
     },
     onClick: id => {
+      console.log(READ_POST_ROUTE + `/${id}`);
       history.pushState(null, null, READ_POST_ROUTE + `/${id}`);
       this.route();
     },

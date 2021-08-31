@@ -1,6 +1,5 @@
 import removeAllChildNodes from '../utils/removeAllChildNodes.js';
 import renderPosts from '../utils/renderPosts.js';
-import Header from './common/Header.js';
 
 /*
  {

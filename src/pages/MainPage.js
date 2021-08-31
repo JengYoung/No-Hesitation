@@ -16,6 +16,7 @@ export default function MainPage({
   this.state = initialState;
 
   const $page = new DocumentFragment();
+  // const $page = document.createElement('div');
   const sideBar = new SideBar({
     $target: $page,
     initialState,
@@ -48,7 +49,6 @@ export default function MainPage({
   };
 
   this.render = () => {
-    console.log('요기', $page.childNodes);
     $target.appendChild($page);
   };
 }
