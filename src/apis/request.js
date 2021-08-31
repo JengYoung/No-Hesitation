@@ -9,6 +9,7 @@ export const API_END_POINT = 'https://kdt.roto.codes';
  */
 const request = async (url, { options, header }) => {
   if (!(typeof url === 'string')) return;
+  console.log('내부', options, header);
   try {
     const res = await fetch(`${API_END_POINT}${url}`, {
       ...options,

@@ -1,4 +1,5 @@
 import getPost from '../apis/route/post/getPost.js';
+import updatePost from '../apis/route/post/updatePost.js';
 import PostForm from '../components/PostForm.js';
 import debounce from '../utils/debounce.js';
 import { getItem, setItem } from '../utils/storage.js';
@@ -38,6 +39,13 @@ export default function PostEditPage({
     onEdit: debounce(
       post => setItem(getLocalPostKey(this.state.id), { ...post }),
       2000,
+    ),
+    onUpdate: debounce(
+      async ({ title, content }) =>
+        await updatePost(this.state.id, this.state.username, {
+          title,
+          content,
+        }),
     ),
   });
 

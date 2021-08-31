@@ -7,6 +7,7 @@ export default function PostForm({
     content: '',
   },
   onEdit,
+  onUpdate,
 }) {
   // 초기 컴포넌트를 DOM에 추가하고, 상태를 초기화합니다.
   const $editor = document.createElement('form');
@@ -24,7 +25,7 @@ export default function PostForm({
   const postTitle = new Input({
     $target: $editor,
     initialState: this.state.title,
-    onChange: title => {
+    onChange: async title => {
       const nextState = {
         ...this.state,
         title,
@@ -32,6 +33,7 @@ export default function PostForm({
       this.setState(nextState);
       postTitle.setState(title);
       onEdit(this.state);
+      await onUpdate(this.state);
     },
   });
   const $postContent = document.createElement('textarea');
@@ -51,11 +53,12 @@ export default function PostForm({
     $target.appendChild($editor);
   };
 
-  $postContent.addEventListener('keyup', e => {
+  $postContent.addEventListener('keyup', async e => {
     this.setState({
       ...this.state,
       content: e.target.value,
     });
     onEdit({ ...this.state });
+    await onUpdate(this.state);
   });
 }
