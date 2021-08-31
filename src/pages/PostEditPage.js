@@ -3,9 +3,14 @@ import PostForm from '../components/PostForm.js';
 import debounce from '../utils/debounce.js';
 import { getItem, setItem } from '../utils/storage.js';
 /*
- * this.state = {
- *   postId: string,
- * }
+ this.state = {
+    id: 'new',
+    title: '',
+    content: '',
+    documents: [],
+    createdAt: '',
+    updatedAt: '',
+ }
  */
 export default function PostEditPage({
   $target,
@@ -20,10 +25,10 @@ export default function PostEditPage({
 }) {
   const $page = document.createDocumentFragment();
   this.state = initialState;
-  const { postId } = this.state;
+  const { id } = this.state;
 
   const defaultValue = { title: '', content: '' };
-  const post = getItem(getLocalPostKey(postId), defaultValue);
+  const post = getItem(getLocalPostKey(id), defaultValue);
 
   const postForm = new PostForm({
     $target: $page,
@@ -31,18 +36,18 @@ export default function PostEditPage({
       ...post,
     },
     onEdit: post => {
-      debounce(setItem, 2000)(getLocalPostKey(this.state.postId), { ...post });
+      debounce(setItem, 2000)(getLocalPostKey(this.state.id), { ...post });
     },
   });
 
-  // postId가 바뀔 때 페이지의 상태가 변화합니다!
+  // id가 바뀔 때 페이지의 상태가 변화합니다!
   this.setState = async nextState => {
     this.state = {
       ...this.state,
       ...nextState,
     };
     const { id, username } = this.state;
-    let post = getItem(getLocalPostKey(this.state.postId), defaultValue);
+    let post = getItem(getLocalPostKey(this.state.id), defaultValue);
     if (id) {
       post = await getPost(id, username);
     }
