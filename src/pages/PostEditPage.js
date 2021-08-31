@@ -30,9 +30,7 @@ export default function PostEditPage({
 
   this.setState = nextState => {
     this.state = nextState;
-    console.log(this.state.postId);
     const post = getItem(getLocalPostKey(this.state.postId), defaultValue);
-    console.log('POST', post);
     this.render();
     postForm.setState(post);
   };

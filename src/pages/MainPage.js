@@ -1,4 +1,5 @@
 import request from '../apis/request.js';
+import Header from '../components/common/Header.js';
 import SideBar from '../components/SideBar.js';
 
 /*
@@ -9,7 +10,8 @@ import SideBar from '../components/SideBar.js';
 */
 export default function MainPage({
   $target,
-  initialState = { username: '', documents: ['여기'] },
+  initialState = { username: '', documents: [] },
+  onClick,
 }) {
   this.state = initialState;
 
@@ -17,17 +19,26 @@ export default function MainPage({
   const sideBar = new SideBar({
     $target: $page,
     initialState,
+    onClick,
+  });
+
+  const header = new Header({
+    $target: $page,
+    headerSize: 'h5',
+    initialState: {
+      content: this.state.username,
+    },
   });
 
   this.setState = () => {
     const posts = request();
-
     this.state = {
       ...this.state,
       documents: posts,
     };
 
     const { username, documents } = this.state;
+    header.setState({ content: username });
     sideBar.setState({
       username,
       documents,
@@ -37,6 +48,7 @@ export default function MainPage({
   };
 
   this.render = () => {
+    console.log('요기', $page.childNodes);
     $target.appendChild($page);
   };
 }
