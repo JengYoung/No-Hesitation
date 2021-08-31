@@ -2,6 +2,7 @@ import router from './apis/router.js';
 import MainPage from './pages/MainPage.js';
 import PostEditPage from './pages/PostEditPage.js';
 import { READ_POST_ROUTE } from '../src/utils/constants.js';
+import removeAllChildNodes from './utils/removeAllChildNodes.js';
 
 export default function App({ $target }) {
   const postEditPage = new PostEditPage({
@@ -20,14 +21,11 @@ export default function App({ $target }) {
     onClick: id => {
       history.pushState(null, null, READ_POST_ROUTE + `/${id}`);
       this.route();
-      console.log(history.state);
     },
   });
 
   this.route = () => {
-    while ($target.hasChildNodes()) {
-      $target.removeChild($target.firstChild);
-    }
+    removeAllChildNodes($target); // App 초기화
     const { pathname } = window.location;
     const splitedPath = pathname.split('/');
 

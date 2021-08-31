@@ -1,3 +1,4 @@
+import removeAllChildNodes from '../utils/removeAllChildNodes.js';
 import renderPosts from '../utils/renderPosts.js';
 import Header from './common/Header.js';
 
@@ -13,8 +14,8 @@ export default function SideBar({ $target, initialState, onClick }) {
   this.state = initialState;
 
   this.setState = nextState => {
-    console.log(this.state, nextState);
     if (JSON.stringify(this.state) !== JSON.stringify(nextState)) {
+      removeAllChildNodes($sideBar);
       this.state = nextState;
       const { documents } = this.state;
       const $fragment = new DocumentFragment();
