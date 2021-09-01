@@ -1,5 +1,4 @@
 import names from '../utils/classNames.js';
-import { API_END_POINT } from '../utils/constants.js';
 import _appendChilds from '../utils/_appendChilds.js';
 
 /*
@@ -9,6 +8,7 @@ import _appendChilds from '../utils/_appendChilds.js';
 const { sideBarContainer, postToggleBtn, postRemoveBtn, postLink, postBlock } =
   names;
 
+const { API_END_POINT } = process.env;
 export default function Post({ $target, initialState }) {
   this.state = initialState;
 

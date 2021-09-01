@@ -17,6 +17,7 @@
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^6.2.0",
+    "dotenv": "^10.0.0",
     "dotenv-webpack": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -37,7 +38,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "dev:webpack": "webpack-dev-server --mode development",
+    "dev:client": "webpack-dev-server --mode development --env client",
     "build": "webpack --mode production"
   },
   "repository": {

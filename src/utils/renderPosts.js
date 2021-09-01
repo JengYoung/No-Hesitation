@@ -12,7 +12,6 @@ export default function renderPosts($parentNode, nowDocuments) {
         title,
       },
     });
-
     renderPosts(post.$post, nextDocs);
   });
 }

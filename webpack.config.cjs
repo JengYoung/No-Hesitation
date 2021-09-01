@@ -1,10 +1,11 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const DotEnv = require('dotenv-webpack');
-const { FA_API_KEY } = process.env;
-module.exports = {
+const Dotenv = require('dotenv-webpack');
+
+module.exports = env => ({
   entry: ['@babel/polyfill', './src/index.js', './src/sass/main.scss'],
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -62,12 +63,14 @@ module.exports = {
     new HtmlPlugin({
       template: './index.html',
       hash: true,
-      apiUrl: `https://kit.fontawesome.com/${FA_API_KEY}.js`,
+      apiUrl: `https://kit.fontawesome.com/${process.env.FA_API_KEY}.js`,
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: 'css/style.css' }),
-    new DotEnv(),
+    new Dotenv({
+      path: `${env.client ? 'client' : 'server'}.env`,
+    }),
   ],
   devtool: 'source-map',
   mode: 'development',
-};
+});

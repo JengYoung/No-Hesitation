@@ -1,10 +1,12 @@
-import { API_END_POINT, ERROR_ETC } from '../utils/constants.js';
+import { ERROR_ETC } from '../utils/constants.js';
 
 /**
  * @param {string} url
  * @param {object} username: string, options: object
  * @returns promise
  */
+
+const { API_END_POINT } = process.env;
 const request = async (url, { options, header }) => {
   if (!(typeof url === 'string')) return;
   try {
