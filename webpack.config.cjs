@@ -1,8 +1,10 @@
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
-  entry: ['@babel/polyfill', './src/index.js'],
+  entry: ['@babel/polyfill', './src/index.js', './src/sass/main.scss'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
@@ -40,10 +42,19 @@ module.exports = {
           options: {
             publicPath: './dist/', // file-loader와 동일
             name: '[name].[ext]?[hash]', // file-loader와 동일
-            limit: 5000 // 5kb 미만 파일만 data url로 처리
-          }
-        }
-      }
+            limit: 10000, // 10kb 미만 파일만 data url로 처리
+          },
+        },
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader', // creates style nodes from JS strings
+          'css-loader', // translates CSS into CommonJS
+          'sass-loader', // compiles Sass to CSS, using Node Sass by default
+        ],
+        exclude: /node_modules/,
+      },
     ],
   },
   plugins: [
@@ -52,6 +63,7 @@ module.exports = {
       hash: true,
     }),
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({ filename: 'css/style.css' }),
   ],
   devtool: 'source-map',
   mode: 'development',
