@@ -2,7 +2,8 @@ const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const DotEnv = require('dotenv-webpack');
+const { FA_API_KEY } = process.env;
 module.exports = {
   entry: ['@babel/polyfill', './src/index.js', './src/sass/main.scss'],
   output: {
@@ -47,7 +48,7 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: [
           'style-loader', // creates style nodes from JS strings
           'css-loader', // translates CSS into CommonJS
@@ -61,9 +62,11 @@ module.exports = {
     new HtmlPlugin({
       template: './index.html',
       hash: true,
+      apiUrl: `https://kit.fontawesome.com/${FA_API_KEY}.js`,
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: 'css/style.css' }),
+    new DotEnv(),
   ],
   devtool: 'source-map',
   mode: 'development',
