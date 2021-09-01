@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -60,16 +59,15 @@ module.exports = env => ({
     ],
   },
   plugins: [
-    new HtmlPlugin({
-      template: './index.html',
-      hash: true,
-      apiUrl: `https://kit.fontawesome.com/${process.env.FA_API_KEY}.js`,
-    }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin({ filename: 'css/style.css' }),
     new Dotenv({
       path: `${env.client ? 'client' : 'server'}.env`,
     }),
+    new HtmlPlugin({
+      template: './index.html',
+      hash: true,
+    }),
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({ filename: 'css/style.css' }),
   ],
   devtool: 'source-map',
   mode: 'development',

@@ -10,3 +10,32 @@ body {
   margin: 0;
   padding: 0;
 }
+
+button {
+  outline: none;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.material-icons-outlined {
+  font-size: 1rem;
+  &.size-125 {
+    font-size: 1.25rem;
+  }
+  &.size-150 {
+    font-size: 1.5rem;
+  }
+  &.size-175 {
+    font-size: 1.75rem;
+  }
+  &.size-175 {
+    font-size: 1.75rem;
+  }
+  &.size-200 {
+    font-size: 2rem;
+  }
+}

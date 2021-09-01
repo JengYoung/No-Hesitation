@@ -7,14 +7,29 @@
   height: 100vh;
   padding: 1rem;
   background: $mint100;
-  .sidebar__item.post {
-    display: block;
-    margin: 0.5rem 0;
-    padding-left: 0.5rem;
-    height: 20px;
-    font-size: 1rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  .sidebar__item.posts {
+    width: 100%;
+    .post {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-right: auto;
+      &:hover {
+        cursor: pointer;
+      }
+      &__link {
+        text-decoration: none;
+        color: black;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      &__remove-btn {
+        margin-left: auto;
+      }
+    }
+    .post__next {
+      padding-left: 1rem;
+    }
   }
 }

@@ -1,44 +1,59 @@
 import names from '../utils/classNames.js';
-import _appendChilds from '../utils/_appendChilds.js';
+import {
+  _appendChilds,
+  _createElemWithAttr,
+} from '../utils/customDOMMethods.js';
 
 /*
   id, title
 */
-
-const { sideBarContainer, postToggleBtn, postRemoveBtn, postLink, postBlock } =
-  names;
-
 const { API_END_POINT } = process.env;
+const {
+  postsItem,
+  postToggleBtn,
+  postRemoveBtn,
+  postLink,
+  postBlock,
+  postNext,
+  outlinedIcon,
+  sharpIcon,
+  sz150,
+  sz175,
+  arrowRightIcon,
+  removePostIcon,
+} = names;
+
 export default function Post({ $target, initialState }) {
   this.state = initialState;
+  const { id, title } = this.state;
 
-  this.fragment = new DocumentFragment();
-  this.$post = document.createElement('div');
-  this.$post.classList.add(sideBarContainer, postBlock);
+  this.$post = _createElemWithAttr('section', [postsItem, postBlock]);
+  this.$postToggleButton = _createElemWithAttr(
+    'button',
+    [postToggleBtn, outlinedIcon, sz175],
+    arrowRightIcon,
+  );
 
-  this.$postToggleButton = document.createElement('button');
-  this.$postToggleButton.classList.add(postToggleBtn);
+  this.$postLink = _createElemWithAttr('a', [postLink]);
+  this.$postLink.dataset['id'] = id;
+  this.$postLink.textContent = title;
 
-  this.$postLink = document.createElement('a');
-  this.$postLink.classList.add(postLink);
-
-  this.$postRemoveButton = document.createElement('button');
-  this.$postRemoveButton.classList.add(postRemoveBtn);
+  this.$postRemoveButton = _createElemWithAttr(
+    'button',
+    [postRemoveBtn, sharpIcon, sz150],
+    removePostIcon,
+  );
+  this.$postNext = _createElemWithAttr('section', [postNext]);
 
   _appendChilds(
-    this.fragment, // append 대상
-    this.$post,
+    this.$post, // append 대상
     this.$postToggleButton,
     this.$postLink,
     this.$postRemoveButton,
   );
 
   this.render = () => {
-    const { id, title } = this.state;
-    this.$postLink.setAttribute('href', `${API_END_POINT}/${id}`);
-    this.$postLink.textContent = title;
-
-    $target.appendChild(this.fragment);
+    $target.appendChild(this.$post);
+    $target.appendChild(this.$postNext);
   };
-  this.render();
 }
