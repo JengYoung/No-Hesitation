@@ -1,3 +1,4 @@
+import classNames from '../utils/classNames.js';
 import removeAllChildNodes from '../utils/removeAllChildNodes.js';
 import renderPosts from '../utils/renderPosts.js';
 
@@ -8,6 +9,7 @@ import renderPosts from '../utils/renderPosts.js';
  */
 export default function SideBar({ $target, initialState, onClick }) {
   const $sideBar = document.createElement('nav');
+  $sideBar.className = classNames.sidebarContainer;
   $target.appendChild($sideBar);
 
   this.state = initialState;

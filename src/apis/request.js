@@ -1,6 +1,4 @@
-import { ERROR_ETC } from '../utils/constants.js';
-
-export const API_END_POINT = 'https://kdt.roto.codes';
+import { API_END_POINT, ERROR_ETC } from '../utils/constants.js';
 
 /**
  * @param {string} url
