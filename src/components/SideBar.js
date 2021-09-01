@@ -2,9 +2,9 @@ import removeAllChildNodes from '../utils/removeAllChildNodes.js';
 import renderPosts from '../utils/renderPosts.js';
 
 /*
- {
-   documents: []
- }
+  {
+    documents: []
+  }
  */
 export default function SideBar({ $target, initialState, onClick }) {
   const $sideBar = document.createElement('nav');
