@@ -39,3 +39,11 @@ button {
     font-size: 2rem;
   }
 }
+
+.invisible {
+  display: none;
+}
+
+.toggle {
+  transform: rotate(90deg);
+}

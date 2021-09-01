@@ -31,7 +31,7 @@
 다음 명령어를 터미널에 입력해주세요.
 
 ```
-npm run dev:webpack
+npm run dev:client
 ```
 
 이후, `http://localhost:8080/` 에서 결과를 확인하면 됩니다 :)

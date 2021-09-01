@@ -1,7 +1,9 @@
 import classNames from '../utils/classNames.js';
-import removeAllChildNodes from '../utils/removeAllChildNodes.js';
+import {
+  _removeAllChildNodes,
+  _createElemWithAttr,
+} from '../utils/customDOMMethods.js';
 import renderPosts from '../utils/renderPosts.js';
-import { _createElemWithAttr } from '../utils/customDOMMethods.js';
 import names from '../utils/classNames.js';
 
 /*
@@ -9,7 +11,8 @@ import names from '../utils/classNames.js';
     documents: []
   }
 */
-const { postsBlock, sideBarItem } = names;
+
+const { postsBlock, sideBarItem, postBlock, postToggleBtn, postNext } = names;
 export default function SideBar({ $target, initialState, onClick }) {
   const $sideBar = document.createElement('nav');
   $sideBar.className = classNames.sideBarContainer;
@@ -20,7 +23,7 @@ export default function SideBar({ $target, initialState, onClick }) {
 
   this.setState = nextState => {
     if (JSON.stringify(this.state) !== JSON.stringify(nextState)) {
-      removeAllChildNodes($sideBar);
+      _removeAllChildNodes($sideBar);
       this.state = nextState;
       const { documents } = this.state;
       const $fragment = new DocumentFragment();
@@ -39,5 +42,16 @@ export default function SideBar({ $target, initialState, onClick }) {
     if (e.target.tagName !== 'A') return;
     const postId = e.target.getAttribute(['data-id']);
     onClick(postId);
+  });
+
+  $posts.addEventListener('click', e => {
+    const { target } = e;
+    if (!target.classList.contains(postToggleBtn)) return;
+    const closestPostId = target.closest(`.${postBlock}`).dataset.id;
+    const $nextItem = $posts.querySelector(
+      `.${postNext}[data-id="${closestPostId}"]`,
+    );
+    $nextItem.classList.toggle('invisible');
+    target.classList.toggle('toggle');
   });
 }

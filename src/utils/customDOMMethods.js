@@ -15,3 +15,8 @@ export const _createElemWithAttr = (
 export const _appendChilds = (node, ...rest) => {
   if (rest) rest.map(child => node.appendChild(child));
 };
+export const _removeAllChildNodes = node => {
+  while (node.hasChildNodes()) {
+    node.removeChild(node.lastChild);
+  }
+};

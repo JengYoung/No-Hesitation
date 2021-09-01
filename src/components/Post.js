@@ -7,7 +7,6 @@ import {
 /*
   id, title
 */
-const { API_END_POINT } = process.env;
 const {
   postsItem,
   postToggleBtn,
@@ -30,9 +29,10 @@ export default function Post({ $target, initialState }) {
   this.$post = _createElemWithAttr('section', [postsItem, postBlock]);
   this.$postToggleButton = _createElemWithAttr(
     'button',
-    [postToggleBtn, outlinedIcon, sz175],
+    [postToggleBtn, outlinedIcon, sz175, 'toggle'],
     arrowRightIcon,
   );
+  this.$post.dataset['id'] = id;
 
   this.$postLink = _createElemWithAttr('a', [postLink]);
   this.$postLink.dataset['id'] = id;
@@ -44,6 +44,7 @@ export default function Post({ $target, initialState }) {
     removePostIcon,
   );
   this.$postNext = _createElemWithAttr('section', [postNext]);
+  this.$postNext.dataset['id'] = id;
 
   _appendChilds(
     this.$post, // append 대상
