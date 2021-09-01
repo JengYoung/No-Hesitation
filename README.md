@@ -17,6 +17,12 @@
 
 ---
 
+## My Code Rules...
+
+1. `_[function name]`: 기존 내장 (혹은 라이브러리) 메서드와 헷갈릴 여지가 있다면, 이를 방지하기 위해 사용한 custom rule입니다!
+
+---
+
 ## How to run
 
 ### Development Environment

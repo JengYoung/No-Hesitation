@@ -13,9 +13,9 @@ lerna-debug.log*
 .pnpm-debug.log*
 
 # dotenv environment variables file
-.env
-.env.test
-.env.production
+*.env
+*.env.test
+*.env.production
 
 # git
 *.BACKUP.*
