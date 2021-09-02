@@ -24,14 +24,15 @@ export default function PostForm({
    *************************************/
   const postTitle = new Input({
     $target: $editor,
-    initialState: this.state.title,
-    onChange: async title => {
+    initialState: { title: this.state.title },
+    onChange: async ({ title }) => {
+      console.log(title);
       const nextState = {
         ...this.state,
         title,
       };
       this.setState(nextState);
-      postTitle.setState(title);
+      postTitle.setState({ title });
       onEdit(this.state);
       await onUpdate(this.state);
     },
@@ -45,7 +46,7 @@ export default function PostForm({
     };
     const { content } = this.state;
     $postContent.value = content;
-    postTitle.setState(this.state.title);
+    postTitle.setState({ title: this.state.title });
   };
 
   this.render = () => {

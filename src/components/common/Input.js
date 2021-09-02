@@ -9,6 +9,7 @@ export default function Input({
   this.state = initialState;
 
   this.setState = nextState => {
+    console.log(nextState);
     this.state = nextState;
     this.$input.value = this.state.title;
   };
@@ -20,6 +21,6 @@ export default function Input({
   this.render();
 
   this.$input.addEventListener('keyup', e => {
-    onChange(e.target.value);
+    onChange({ title: e.target.value });
   });
 }

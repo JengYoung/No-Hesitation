@@ -40,14 +40,12 @@ export default function PostEditPage({
       post => setItem(getLocalPostKey(this.state.id), { ...post }),
       2000,
     ),
-    onUpdate: debounce(
-      async ({ title, content }) =>
-        await updatePost(this.state.id, this.state.username, {
-          title,
-          content,
-        }),
-      5000,
-    ),
+    onUpdate: debounce(async ({ title, content }) => {
+      const res = await updatePost(this.state.id, this.state.username, {
+        title,
+        content,
+      });
+    }, 5000),
   });
 
   // id가 바뀔 때 페이지의 상태가 변화합니다!
