@@ -7,6 +7,8 @@ import { ERROR_ETC } from '../utils/constants.js';
  */
 
 const { API_END_POINT } = process.env;
+const { SIGHINMIDNIGHT } = process.env;
+console.log(SIGHINMIDNIGHT);
 const request = async (url, { options, header }) => {
   if (!(typeof url === 'string')) return;
   try {

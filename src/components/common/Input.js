@@ -1,20 +1,25 @@
-export default function Input({ $target, initialState, onChange }) {
-  const $input = document.createElement('input');
-
+export default function Input({
+  $target,
+  placeholder,
+  initialState,
+  onChange,
+}) {
+  this.$input = document.createElement('input');
+  this.$input.placeholder = placeholder;
   this.state = initialState;
 
   this.setState = nextState => {
     this.state = nextState;
-    $input.value = this.state;
+    this.$input.value = this.state.title;
   };
 
   this.render = () => {
-    $target.appendChild($input);
+    $target.appendChild(this.$input);
   };
 
   this.render();
 
-  $input.addEventListener('keyup', e => {
+  this.$input.addEventListener('keyup', e => {
     onChange(e.target.value);
   });
 }

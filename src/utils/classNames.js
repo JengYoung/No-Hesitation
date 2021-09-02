@@ -2,18 +2,37 @@ const names = {
   //Material Icon
   outlinedIcon: 'material-icons-outlined',
   sharpIcon: 'material-icons-sharp',
+
   // Block
+  container: 'container',
+  modalBlock: 'modal',
   sideBarContainer: 'sidebar-container',
   postsBlock: 'posts',
   postBlock: 'post',
 
   /* Element */
-  // post
-  postsItem: 'posts__item',
+  //modal
+  modalConformButton: 'modal__conform-btn',
+  modalCancelButton: 'modal__cancel-btn',
+  modalHead: 'modal__head',
+  modalInput: 'modal__input',
+  modalButtonBox: 'modal__btn-box',
+
+  //sidebar
   sideBarItem: 'sidebar__item',
+
+  // posts
+  postsItem: 'posts__item',
+
+  // post-next
+  postNext: 'post-next',
+  postNextNew: 'post-next__new',
+  postNextNewText: 'post-next__new-text',
+  postNextNewIcon: 'post-next__new-icon',
+
+  // post
   postLink: 'post__link',
   postNow: 'post__now',
-  postNext: 'post__next',
   postToggleBtn: 'post__toggle-btn',
   postRemoveBtn: 'post__remove-btn',
 
@@ -28,6 +47,7 @@ const names = {
 
   // icon-name
   arrowRightIcon: 'arrow_right',
+  addIcon: 'add_circle_outline',
   editOffIcon: 'edit_off',
   clearIcon: 'clear',
   createPostIcon: 'create',

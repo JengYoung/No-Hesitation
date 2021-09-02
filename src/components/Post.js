@@ -26,7 +26,7 @@ export default function Post({ $target, initialState }) {
   this.state = initialState;
   const { id, title } = this.state;
 
-  this.$post = _createElemWithAttr('section', [postsItem, postBlock]);
+  this.$post = _createElemWithAttr('div', [postsItem, postBlock]);
   this.$postToggleButton = _createElemWithAttr(
     'button',
     [postToggleBtn, outlinedIcon, sz175, 'toggle'],
@@ -34,9 +34,8 @@ export default function Post({ $target, initialState }) {
   );
   this.$post.dataset['id'] = id;
 
-  this.$postLink = _createElemWithAttr('a', [postLink]);
+  this.$postLink = _createElemWithAttr('a', [postLink], title);
   this.$postLink.dataset['id'] = id;
-  this.$postLink.textContent = title;
 
   this.$postRemoveButton = _createElemWithAttr(
     'button',
@@ -57,4 +56,6 @@ export default function Post({ $target, initialState }) {
     $target.appendChild(this.$post);
     $target.appendChild(this.$postNext);
   };
+
+  this.render();
 }

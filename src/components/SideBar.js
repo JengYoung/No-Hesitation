@@ -5,6 +5,8 @@ import {
 } from '../utils/customDOMMethods.js';
 import renderPosts from '../utils/renderPosts.js';
 import names from '../utils/classNames.js';
+import createPost from '../apis/route/post/createPost.js';
+import InputModal from './common/InputModal.js';
 
 /*
   {
@@ -12,7 +14,14 @@ import names from '../utils/classNames.js';
   }
 */
 
-const { postsBlock, sideBarItem, postBlock, postToggleBtn, postNext } = names;
+const {
+  postsBlock,
+  sideBarItem,
+  postBlock,
+  postToggleBtn,
+  postNext,
+  postNextNew,
+} = names;
 export default function SideBar({ $target, initialState, onClick }) {
   const $sideBar = document.createElement('nav');
   $sideBar.className = classNames.sideBarContainer;
@@ -53,5 +62,18 @@ export default function SideBar({ $target, initialState, onClick }) {
     );
     $nextItem.classList.toggle('invisible');
     target.classList.toggle('toggle');
+  });
+
+  $sideBar.addEventListener('click', e => {
+    const closestPostNextNew = e.target.closest(`.${postNextNew}`);
+    if (!closestPostNextNew) return;
+    const inputModal = new InputModal({
+      $target: document.querySelector('#app'),
+      head: '생성할 페이지의 제목을 입력해주세요!',
+      onConform: ({ title, parent }) => {
+        createPost(this.state.username, { body: { title, parent } });
+      },
+    });
+    inputModal.render();
   });
 }

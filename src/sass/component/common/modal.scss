@@ -1,0 +1,53 @@
+@import "../../color.scss";
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 999 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.8);
+  width: 100vw;
+  height: 100vh;
+  .modal {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 25rem;
+    height: 15rem;
+    background: white;
+    border-radius: 1rem;
+    box-sizing: border-box;
+    &__head {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    &__input {
+      height: 2rem;
+      margin-bottom: 2rem;
+    }
+    &__btn-box {
+      width: auto;
+      position: relative;
+      margin-left: auto;
+      .modal__cancel-btn,.modal__conform-btn {
+        width: 5rem;
+        height: 2rem;
+        border-radius: 1rem;
+        background-color: rgb(255, 106, 106);
+        color: white;
+        transition: all 0.3s;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+      .modal__conform-btn {
+        background-color: rgb(99, 201, 142);
+        margin-right: 1rem;
+      }
+    }
+  }
+}
