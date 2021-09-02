@@ -6,9 +6,11 @@ import {
 import renderPosts from '../utils/renderPosts.js';
 import names from '../utils/classNames.js';
 import createPost from '../apis/route/post/createPost.js';
-import InputModal from './common/InputModal.js';
+import Modal from './common/Modal.js';
 import { push } from '../apis/router.js';
 import { ERROR_STATUS } from '../utils/constants.js';
+import deletePost from '../apis/route/post/deletePost.js';
+import getPostList from '../apis/route/post/getPostList.js';
 
 /*
   {
@@ -16,25 +18,27 @@ import { ERROR_STATUS } from '../utils/constants.js';
   }
 */
 
-const {
-  postsBlock,
-  sideBarItem,
-  postBlock,
-  postToggleBtn,
-  postNext,
-  postNextNew,
-} = names;
 export default function SideBar({ $target, initialState, onClick }) {
+  const {
+    postsItem,
+    postsBlock,
+    sideBarItem,
+    postBlock,
+    postToggleBtn,
+    postNext,
+    postNextNew,
+    postRemoveBtn,
+  } = names;
+
   const $sideBar = document.createElement('nav');
   $sideBar.className = classNames.sideBarContainer;
-  $target.appendChild($sideBar);
 
   const $posts = _createElemWithAttr('section', [sideBarItem, postsBlock]);
   this.state = initialState;
 
   this.setState = nextState => {
     if (JSON.stringify(this.state) !== JSON.stringify(nextState)) {
-      _removeAllChildNodes($sideBar);
+      _removeAllChildNodes($posts);
       this.state = nextState;
       const { documents } = this.state;
       const $fragment = new DocumentFragment();
@@ -50,7 +54,7 @@ export default function SideBar({ $target, initialState, onClick }) {
   };
 
   $sideBar.addEventListener('click', e => {
-    if (e.target.tagName !== 'A') return;
+    if (!e.target.classList.contains(postsItem)) return;
     const postId = e.target.getAttribute(['data-id']);
     onClick(postId);
   });
@@ -69,10 +73,12 @@ export default function SideBar({ $target, initialState, onClick }) {
   $sideBar.addEventListener('click', e => {
     const closestPostNextNew = e.target.closest(`.${postNextNew}`);
     if (!closestPostNextNew) return;
+    const $app = document.querySelector('#app');
     const closestPostNext = e.target.closest(`.${postNext}`);
-    const inputModal = new InputModal({
-      $target: document.querySelector('#app'),
+    const modal = new Modal({
+      $target: $app,
       head: '생성할 페이지의 제목을 입력해주세요!',
+      isInput: true,
       onConform: async title => {
         try {
           const result = await createPost(this.state.username, {
@@ -86,6 +92,32 @@ export default function SideBar({ $target, initialState, onClick }) {
         }
       },
     });
-    inputModal.render();
+    modal.render();
+  });
+
+  $sideBar.addEventListener('click', e => {
+    if (!e.target.classList.contains(postRemoveBtn)) return;
+    const $app = document.querySelector('#app');
+    const closestPostNext = e.target.closest(`.${postsItem}`);
+    const modal = new Modal({
+      $target: document.querySelector('#app'),
+      head: '정말로 삭제하시겠어요?',
+      isInput: false,
+      onConform: async () => {
+        try {
+          await deletePost(this.state.username, closestPostNext.dataset.id);
+          const posts = await getPostList(this.state.username);
+          this.setState({
+            documents: posts,
+          });
+        } catch (e) {
+          console.error(e);
+          alert(ERROR_STATUS, e);
+        } finally {
+          $app.removeChild(modal.$container);
+        }
+      },
+    });
+    modal.render();
   });
 }

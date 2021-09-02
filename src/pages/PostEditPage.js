@@ -24,7 +24,7 @@ export default function PostEditPage({
     updatedAt: '',
   },
 }) {
-  const $page = document.createDocumentFragment();
+  const $page = document.createElement('div');
   this.state = initialState;
   const { id } = this.state;
 

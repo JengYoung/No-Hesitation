@@ -15,7 +15,7 @@ export default function MainPage({
 }) {
   this.state = initialState;
 
-  const $page = new DocumentFragment();
+  const $page = document.createElement('div');
   const sideBar = new SideBar({
     $target: $page,
     initialState,
