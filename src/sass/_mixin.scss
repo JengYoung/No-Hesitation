@@ -1,0 +1,11 @@
+@mixin _button($bgColor, $color) {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 1rem;
+  transition: all 0.3s;
+  background-color: $bgColor;
+  color: $color;
+  &:hover {
+    transform: scale(1.1);
+  }
+}

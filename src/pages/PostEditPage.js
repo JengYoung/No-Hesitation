@@ -41,7 +41,7 @@ export default function PostEditPage({
       2000,
     ),
     onUpdate: debounce(async ({ title, content }) => {
-      const res = await updatePost(this.state.id, this.state.username, {
+      await updatePost(this.state.id, this.state.username, {
         title,
         content,
       });

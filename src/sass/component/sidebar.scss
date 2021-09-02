@@ -1,4 +1,5 @@
-@import "../color";
+@import "../color.scss";
+@import "../mixin.scss";
 
 .sidebar-container {
   position: fixed;
@@ -6,8 +7,21 @@
   width: 300px;
   height: 100vh;
   overflow-y: scroll;
-  padding: 1rem;
+  padding: 0 1rem;
   background: $mint100;
+  .sidebar__btn-box {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+    .sidebar__create-post-btn {
+      position: relative;
+      right: 0;
+      @include _button($mint500, white);
+      width: 7rem;
+      height: 2rem;
+      padding: 0.5rem 1rem;
+    }
+  }
   .sidebar__item.posts {
     width: 100%;
     .post {
@@ -27,15 +41,21 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+        &:hover {
+          color: $mint500;
+        }
       }
       &__toggle-btn {
         transition: all 0.3s;
         &:hover {
-          color: rgb(255, 145, 0);
+          color: $mint500;
         }
       }
       &__remove-btn {
         margin-left: auto;
+        &:hover {
+          color:  $red300;
+        }
       }
       &__new-button {
         display: flex;
@@ -51,7 +71,7 @@
         margin-bottom: 1rem;
         &:hover {
           cursor: pointer;
-          color: rgb(255, 145, 0);
+          color: $mint500;
         }
       }
       &__new-icon {

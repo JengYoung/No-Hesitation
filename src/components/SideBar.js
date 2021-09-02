@@ -11,9 +11,11 @@ import { push } from '../apis/router.js';
 import { ERROR_STATUS } from '../utils/constants.js';
 import deletePost from '../apis/route/post/deletePost.js';
 import getPostList from '../apis/route/post/getPostList.js';
+import Button from './common/Button.js';
 
 /*
   {
+    username,
     documents: []
   }
 */
@@ -23,9 +25,12 @@ export default function SideBar({ $target, initialState, onClick }) {
     postsItem,
     postsBlock,
     sideBarItem,
+    sideBarButtonBox,
+    sideBarCreatePostBtn,
     postBlock,
     postToggleBtn,
     postNext,
+    postLink,
     postNextNew,
     postRemoveBtn,
   } = names;
@@ -35,6 +40,34 @@ export default function SideBar({ $target, initialState, onClick }) {
 
   const $posts = _createElemWithAttr('section', [sideBarItem, postsBlock]);
   this.state = initialState;
+
+  const $sideBarButtonBox = _createElemWithAttr('div', [sideBarButtonBox]);
+  new Button({
+    $target: $sideBarButtonBox,
+    attributes: { classNames: [sideBarCreatePostBtn], text: '페이지 생성' },
+    onClick: () => {
+      const $app = document.querySelector('#app');
+      const modal = new Modal({
+        $target: $app,
+        head: '생성할 페이지의 제목을 입력해주세요!',
+        isInput: true,
+        onConform: async title => {
+          try {
+            const result = await createPost(this.state.username, {
+              title,
+              parent: null,
+            });
+            push(`/posts/${result.id}`);
+          } catch (e) {
+            console.error(e);
+            alert(ERROR_STATUS, e);
+          }
+        },
+      });
+      modal.render();
+    },
+  });
+  $sideBar.appendChild($sideBarButtonBox);
 
   this.setState = nextState => {
     if (JSON.stringify(this.state) !== JSON.stringify(nextState)) {
@@ -54,14 +87,18 @@ export default function SideBar({ $target, initialState, onClick }) {
   };
 
   $sideBar.addEventListener('click', e => {
-    if (!e.target.classList.contains(postsItem)) return;
-    const postId = e.target.getAttribute(['data-id']);
+    if (
+      !e.target.classList.contains(postsItem) &&
+      !e.target.classList.contains(postLink)
+    )
+      return;
+    const postId = e.target.closest(`.${postsItem}`).getAttribute(['data-id']);
     onClick(postId);
   });
 
   $posts.addEventListener('click', e => {
     const { target } = e;
-    if (!target.classList.contains(postToggleBtn)) return;
+    if (!target.classList.contains(postToggleBtn, 'post__link')) return;
     const closestPostId = target.closest(`.${postBlock}`).dataset.id;
     const $nextItem = $posts.querySelector(
       `.${postNext}[data-id="${closestPostId}"]`,

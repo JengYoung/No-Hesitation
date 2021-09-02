@@ -19,7 +19,9 @@ const names = {
   modalButtonBox: 'modal__btn-box',
 
   //sidebar
+  sideBarButtonBox: 'sidebar__btn-box',
   sideBarItem: 'sidebar__item',
+  sideBarCreatePostBtn: 'sidebar__create-post-btn',
 
   // posts
   postsItem: 'posts__item',

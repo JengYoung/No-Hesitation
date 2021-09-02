@@ -9,7 +9,6 @@ export default function Input({
   this.state = initialState;
 
   this.setState = nextState => {
-    console.log(nextState);
     this.state = nextState;
     this.$input.value = this.state.title;
   };

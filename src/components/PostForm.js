@@ -26,7 +26,6 @@ export default function PostForm({
     $target: $editor,
     initialState: { title: this.state.title },
     onChange: async ({ title }) => {
-      console.log(title);
       const nextState = {
         ...this.state,
         title,

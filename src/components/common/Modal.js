@@ -43,7 +43,7 @@ export default function Modal({
       $target: $modal,
       placeholder: '제목을 입력해주세요!',
       initialState: this.state,
-      onChange: title => {
+      onChange: ({ title }) => {
         this.setState({ title });
       },
     });

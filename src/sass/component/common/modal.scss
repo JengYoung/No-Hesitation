@@ -1,4 +1,5 @@
 @import "../../color.scss";
+@import "../../mixin.scss";
 .container {
   position: fixed;
   top: 0;
@@ -35,18 +36,10 @@
       margin-left: auto;
       margin-top: auto;
       .modal__cancel-btn,.modal__conform-btn {
-        width: 5rem;
-        height: 2rem;
-        border-radius: 1rem;
-        background-color: rgb(255, 106, 106);
-        color: white;
-        transition: all 0.3s;
-        &:hover {
-          transform: scale(1.1);
-        }
+        @include _button($red300, white);
       }
       .modal__conform-btn {
-        background-color: $mint500;
+        @include _button($mint500, white);
         margin-right: 1rem;
       }
     }
