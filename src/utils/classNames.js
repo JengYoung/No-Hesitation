@@ -4,14 +4,18 @@ const names = {
   sharpIcon: 'material-icons-sharp',
 
   // Block
+  page: 'page',
   container: 'container',
   modalBlock: 'modal',
   sideBarContainer: 'sidebar-container',
   postsBlock: 'posts',
   postBlock: 'post',
+  headerBlock: 'header-container',
 
   /* Element */
   //modal
+  userInfo: 'header__user-info',
+  usernameMark: 'user-info__username-mark',
   modalConformButton: 'modal__conform-btn',
   modalCancelButton: 'modal__cancel-btn',
   modalHead: 'modal__head',

@@ -1,6 +1,8 @@
 import getPostList from '../apis/route/post/getPostList.js';
-import Header from '../components/common/Header.js';
+import Header from '../components/Header.js';
 import SideBar from '../components/SideBar.js';
+import names from '../utils/classNames.js';
+import { _createElemWithAttr } from '../utils/customDOMMethods.js';
 
 /*
   {
@@ -13,21 +15,20 @@ export default function MainPage({
   initialState = { username: '', documents: [] },
   onClick,
 }) {
+  const { page } = names;
   this.state = initialState;
 
-  const $page = document.createElement('div');
+  const $page = _createElemWithAttr('div', [page]);
+  const header = new Header({
+    $target: $page,
+    initialState: {
+      username: this.state.username,
+    },
+  });
   const sideBar = new SideBar({
     $target: $page,
     initialState,
     onClick,
-  });
-
-  const header = new Header({
-    $target: $page,
-    headerSize: 'h5',
-    initialState: {
-      content: this.state.username,
-    },
   });
 
   this.setState = async () => {
@@ -38,7 +39,7 @@ export default function MainPage({
     };
 
     const { username, documents } = this.state;
-    header.setState({ content: username });
+    header.setState({ username });
     sideBar.setState({
       username,
       documents,
