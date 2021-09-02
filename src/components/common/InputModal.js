@@ -58,7 +58,16 @@ export default function InputModal({
   };
 
   this.render = () => {
-    console.log($target);
     $target.appendChild($fragment);
   };
+
+  const onCancel = () => {
+    $target.removeChild($container);
+  };
+
+  $conformButton.addEventListener(
+    'click',
+    async () => await onConform(this.state.title),
+  );
+  $cancelButton.addEventListener('click', () => onCancel());
 }

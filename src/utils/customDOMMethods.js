@@ -3,9 +3,10 @@ export const _createElemWithAttr = (
   classNames = [],
   text = '',
 ) => {
+  console.log();
   const $elem = document.createElement(elemTagName);
   if (classNames) $elem.classList.add(...classNames);
-  if (text.length) $elem.textContent = text;
+  if (text?.length) $elem.textContent = text;
   return $elem;
 };
 /*

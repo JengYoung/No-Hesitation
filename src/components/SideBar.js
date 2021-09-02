@@ -7,6 +7,8 @@ import renderPosts from '../utils/renderPosts.js';
 import names from '../utils/classNames.js';
 import createPost from '../apis/route/post/createPost.js';
 import InputModal from './common/InputModal.js';
+import { push } from '../apis/router.js';
+import { ERROR_STATUS } from '../utils/constants.js';
 
 /*
   {
@@ -67,11 +69,21 @@ export default function SideBar({ $target, initialState, onClick }) {
   $sideBar.addEventListener('click', e => {
     const closestPostNextNew = e.target.closest(`.${postNextNew}`);
     if (!closestPostNextNew) return;
+    const closestPostNext = e.target.closest(`.${postNext}`);
     const inputModal = new InputModal({
       $target: document.querySelector('#app'),
       head: '생성할 페이지의 제목을 입력해주세요!',
-      onConform: ({ title, parent }) => {
-        createPost(this.state.username, { body: { title, parent } });
+      onConform: async title => {
+        try {
+          const result = await createPost(this.state.username, {
+            title,
+            parent: closestPostNext.dataset.id,
+          });
+          push(`/posts/${result.id}`);
+        } catch (e) {
+          console.error(e);
+          alert(ERROR_STATUS, e);
+        }
       },
     });
     inputModal.render();

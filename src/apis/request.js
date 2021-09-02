@@ -10,6 +10,7 @@ const { API_END_POINT } = process.env;
 const { SIGHINMIDNIGHT } = process.env;
 console.log(SIGHINMIDNIGHT);
 const request = async (url, { options, header }) => {
+  console.log(url, { options, header });
   if (!(typeof url === 'string')) return;
   try {
     const res = await fetch(`${API_END_POINT}${url}`, {
@@ -19,6 +20,7 @@ const request = async (url, { options, header }) => {
         'Content-Type': 'application/json',
       },
     });
+    console.log(res);
     if (res.ok) {
       return await res.json();
     }
