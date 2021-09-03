@@ -12,7 +12,7 @@ export default function PostForm({
   onUpdate,
 }) {
   // 초기 컴포넌트를 DOM에 추가하고, 상태를 초기화합니다.
-  const { postForm, postTitle: postTitleClassName, editor } = names;
+  const { postForm, postTitle: postTitleClassName, editor, titleBox } = names;
   const $postForm = _createElemWithAttr('form', [postForm]);
   /*
    * this.state = {
@@ -25,9 +25,12 @@ export default function PostForm({
   /*************************************
    *            component              *
    *************************************/
+
+  const $titleBox = _createElemWithAttr('div', [titleBox]);
   const postTitle = new Input({
-    $target: $postForm,
+    $target: $titleBox,
     classNames: [postTitleClassName],
+    placeholder: '제목을 입력해주세요! 😆',
     initialState: { title: this.state.title },
     onChange: async ({ title }) => {
       const nextState = {
@@ -40,6 +43,8 @@ export default function PostForm({
       await onUpdate(this.state);
     },
   });
+  $postForm.appendChild($titleBox);
+
   const $editor = _createElemWithAttr('textarea', [editor]);
 
   this.setState = nextState => {
@@ -55,7 +60,6 @@ export default function PostForm({
   this.render = () => {
     $postForm.appendChild($editor);
     $target.appendChild($postForm);
-    console.log('target', $target);
   };
 
   $editor.addEventListener('keyup', async e => {

@@ -1,11 +1,10 @@
-@import "../_color.scss";
-@import "../mixin.scss";
+@import "@/sass/_variables";
 
 .sidebar-container {
   // position: fixed;
-  top: 0;
+  top: $headerHeight;
   width: 300px;
-  height: auto;
+  height: calc(100vh - #{$headerHeight});
   overflow-y: scroll;
   padding: 0 1rem;
   background: $mint100;

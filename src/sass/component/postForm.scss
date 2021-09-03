@@ -1,4 +1,31 @@
 .post-form {
   display: flex;
   flex-direction: column;
-}
+  width: calc(100vw - 300px);
+
+  &__title-box {
+    display: flex;
+    align-items: center;
+    height: 300px;
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 2rem;
+    .title-box__post-title {
+      width: calc(70vw - 300px);
+      margin: 0 auto;
+      border: none;
+      outline: none;
+      font-size: 2rem;
+      border-bottom: 1px solid lightgray;
+      &:focus {
+        border-color: $mint500;
+      }
+      ::placeholder {
+        padding-top: 10px;
+      }
+    }
+  }
+  &__editor {
+    width: calc(70vw - 300px);
+    margin: 0 auto;
+  }
+};

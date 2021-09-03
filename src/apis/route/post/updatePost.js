@@ -4,7 +4,6 @@ const updatePost = async (id, username, body) => {
   const nowTitle = title ?? null;
   const nowContent = content ?? null;
   if (!nowTitle || !nowContent) return;
-
   return await request(`/documents/${id}`, {
     options: {
       body: JSON.stringify(body),

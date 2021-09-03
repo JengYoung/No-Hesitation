@@ -47,7 +47,8 @@ const names = {
   postRemoveBtn: 'post__remove-btn',
 
   // postForm
-  postTitle: 'post-form__post-title',
+  titleBox: 'post-form__title-box',
+  postTitle: 'title-box__post-title',
   editor: 'post-form__editor',
 
   // icon-size

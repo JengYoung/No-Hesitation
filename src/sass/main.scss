@@ -1,8 +1,9 @@
 @import 'normalize.css';
-@import "./color";
-@import "./mixin";
-@import "./pages/pages";
-@import "./component/component";
+@import "@/sass/color";
+@import "@/sass/mixin";
+@import "@/sass/pages/pages";
+@import "@/sass/component/component";
+@import "@/sass/variables";
 
 html {
   font-size: 16px;

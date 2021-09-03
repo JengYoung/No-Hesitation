@@ -1,6 +1,10 @@
 import getPost from '@/apis/route/post/getPost';
 import getPostList from '@/apis/route/post/getPostList';
 import updatePost from '@/apis/route/post/updatePost';
+import {
+  dispatchUpdateTitle,
+  updateTitleDispatcher,
+} from '@/utils/customEvent';
 import Header from '@/components/Header';
 import PostForm from '@/components/PostForm';
 import SideBar from '@/components/SideBar';
@@ -34,7 +38,6 @@ export default function PostEditPage({
   const $page = _createElemWithAttr('div', [postEditPage]);
   const $container = _createElemWithAttr('div', [mainContainer]);
   $page.appendChild($container);
-  console.log($page.children);
   this.state = initialState;
   const { id } = this.state;
 
@@ -64,14 +67,18 @@ export default function PostEditPage({
     },
     onEdit: debounce(
       post => setItem(getLocalPostKey(this.state.id), { ...post }),
-      2000,
+      500,
     ),
     onUpdate: debounce(async ({ title, content }) => {
       await updatePost(this.state.id, this.state.username, {
         title,
-        content,
+        content: content ?? '\n', // 수정의 경우, 제목을 바꿨으나 내용물이 없으면 보내지지 않으므로 띄어쓰기 하나라도 만들어서, 제목을 수정시킵니다.
       });
-    }, 5000),
+      dispatchUpdateTitle({
+        id: window.location.pathname.split('/')[2],
+        title,
+      });
+    }, 1500),
   });
 
   // id가 바뀔 때 페이지의 상태가 변화합니다!
@@ -102,6 +109,8 @@ export default function PostEditPage({
     $page.appendChild($container);
     $target.appendChild($page);
   };
+
+  updateTitleDispatcher();
 }
 
 const getLocalPostKey = postId => {
