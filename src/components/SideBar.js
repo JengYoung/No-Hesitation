@@ -1,17 +1,17 @@
-import classNames from '../utils/classNames.js';
+import classNames from '@/utils/classNames';
 import {
   _removeAllChildNodes,
   _createElemWithAttr,
-} from '../utils/customDOMMethods.js';
-import renderPosts from '../utils/renderPosts.js';
-import names from '../utils/classNames.js';
-import createPost from '../apis/route/post/createPost.js';
-import Modal from './common/Modal.js';
-import { push } from '../apis/router.js';
-import { ERROR_STATUS } from '../utils/constants.js';
-import deletePost from '../apis/route/post/deletePost.js';
-import getPostList from '../apis/route/post/getPostList.js';
-import Button from './common/Button.js';
+} from '@/utils/customDOMMethods';
+import renderPosts from '@/utils/renderPosts';
+import names from '@/utils/classNames';
+import createPost from '@/apis/route/post/createPost';
+import Modal from '@/components/common/Modal';
+import { push } from '@/apis/router';
+import { ERROR_STATUS } from '@/utils/constants';
+import deletePost from '@/apis/route/post/deletePost';
+import getPostList from '@/apis/route/post/getPostList';
+import Button from '@/components/common/Button';
 
 /*
   {

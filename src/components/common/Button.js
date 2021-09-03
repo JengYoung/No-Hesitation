@@ -1,4 +1,4 @@
-import { _createElemWithAttr } from '../../utils/customDOMMethods.js';
+import { _createElemWithAttr } from '@/utils/customDOMMethods';
 
 /*
   일반적으로 동적으로 잘 렌더링 되지 않은 일반환된 버튼입니다.

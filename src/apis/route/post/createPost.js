@@ -1,4 +1,4 @@
-import request from '../../request.js';
+import request from '@/apis/request';
 
 const createPost = async (username, body) => {
   return await request(`/documents`, {

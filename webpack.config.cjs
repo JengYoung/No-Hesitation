@@ -5,14 +5,25 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = env => ({
+  resolve: {
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    extensions: ['.js'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
   entry: ['@babel/polyfill', './src/index.js', './src/sass/main.scss'],
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
     filename: 'bundle.js',
   },
   devServer: {
     static: './dist',
     hot: true,
+    historyApiFallback: {
+      index: '/index.html',
+    },
   },
   module: {
     rules: [

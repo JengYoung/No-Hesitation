@@ -1,6 +1,6 @@
-import Post from '../components/Post.js';
-import names from './classNames.js';
-import { _appendChilds, _createElemWithAttr } from './customDOMMethods.js';
+import Post from '@/components/Post';
+import names from '@/utils/classNames';
+import { _appendChilds, _createElemWithAttr } from '@/utils/customDOMMethods';
 
 export default function renderPosts($parentNode, nowDocuments) {
   const {

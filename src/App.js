@@ -1,8 +1,8 @@
-import router from './apis/router.js';
-import MainPage from './pages/MainPage.js';
-import PostEditPage from './pages/PostEditPage.js';
-import { ROUTE_POST } from '../src/utils/constants.js';
-import { _removeAllChildNodes } from './utils/customDOMMethods.js';
+import router from '@/apis/router';
+import MainPage from '@/pages/MainPage';
+import PostEditPage from '@/pages/PostEditPage';
+import { ROUTE_POST } from '@/utils/constants';
+import { _removeAllChildNodes } from '@/utils/customDOMMethods';
 
 export default function App({ $target }) {
   const onClick = id => {

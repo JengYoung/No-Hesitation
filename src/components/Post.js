@@ -1,8 +1,5 @@
-import names from '../utils/classNames.js';
-import {
-  _appendChilds,
-  _createElemWithAttr,
-} from '../utils/customDOMMethods.js';
+import names from '@/utils/classNames';
+import { _appendChilds, _createElemWithAttr } from '@/utils/customDOMMethods';
 
 /*
   id, title

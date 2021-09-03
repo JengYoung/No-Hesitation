@@ -1,4 +1,4 @@
-import request from '../../request.js';
+import request from '@/apis/request';
 
 const deletePost = async (username, id) => {
   return await request(`/documents/${id}`, {

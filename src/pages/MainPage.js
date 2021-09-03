@@ -1,8 +1,8 @@
-import getPostList from '../apis/route/post/getPostList.js';
-import Header from '../components/Header.js';
-import SideBar from '../components/SideBar.js';
-import names from '../utils/classNames.js';
-import { _createElemWithAttr } from '../utils/customDOMMethods.js';
+import getPostList from '@/apis/route/post/getPostList';
+import Header from '@/components/Header';
+import SideBar from '@/components/SideBar';
+import names from '@/utils/classNames';
+import { _createElemWithAttr } from '@/utils/customDOMMethods';
 
 /*
   {

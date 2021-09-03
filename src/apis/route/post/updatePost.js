@@ -1,4 +1,4 @@
-import request from '../../request.js';
+import request from '@/apis/request';
 const updatePost = async (id, username, body) => {
   const { title, content } = body;
   const nowTitle = title ?? null;

@@ -1,4 +1,4 @@
-import { ERROR_ETC } from '../utils/constants.js';
+import { ERROR_ETC } from '@/utils/constants';
 
 /**
  * @param {string} url

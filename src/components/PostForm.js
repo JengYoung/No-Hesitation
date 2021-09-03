@@ -1,6 +1,6 @@
-import names from '../utils/classNames.js';
-import { _createElemWithAttr } from '../utils/customDOMMethods.js';
-import Input from './common/Input.js';
+import names from '@/utils/classNames';
+import { _createElemWithAttr } from '@/utils/customDOMMethods';
+import Input from '@/components/common/Input';
 
 export default function PostForm({
   $target,
@@ -13,7 +13,6 @@ export default function PostForm({
 }) {
   // 초기 컴포넌트를 DOM에 추가하고, 상태를 초기화합니다.
   const { postForm, postTitle: postTitleClassName, editor } = names;
-
   const $postForm = _createElemWithAttr('form', [postForm]);
   /*
    * this.state = {

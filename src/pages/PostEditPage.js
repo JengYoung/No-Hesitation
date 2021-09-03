@@ -1,13 +1,13 @@
-import getPost from '../apis/route/post/getPost.js';
-import getPostList from '../apis/route/post/getPostList.js';
-import updatePost from '../apis/route/post/updatePost.js';
-import Header from '../components/Header.js';
-import PostForm from '../components/PostForm.js';
-import SideBar from '../components/SideBar.js';
-import names from '../utils/classNames.js';
-import { _createElemWithAttr } from '../utils/customDOMMethods.js';
-import debounce from '../utils/debounce.js';
-import { getItem, setItem } from '../utils/storage.js';
+import getPost from '@/apis/route/post/getPost';
+import getPostList from '@/apis/route/post/getPostList';
+import updatePost from '@/apis/route/post/updatePost';
+import Header from '@/components/Header';
+import PostForm from '@/components/PostForm';
+import SideBar from '@/components/SideBar';
+import names from '@/utils/classNames';
+import { _createElemWithAttr } from '@/utils/customDOMMethods';
+import debounce from '@/utils/debounce';
+import { getItem, setItem } from '@/utils/storage';
 /*
  this.state = {
     id: 'new',

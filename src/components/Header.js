@@ -1,6 +1,6 @@
-import checkState from '../utils/checkState.js';
-import names from '../utils/classNames.js';
-import { _createElemWithAttr } from '../utils/customDOMMethods.js';
+import checkState from '@/utils/checkState';
+import names from '@/utils/classNames';
+import { _createElemWithAttr } from '@/utils/customDOMMethods';
 
 export default function Header({
   $target,

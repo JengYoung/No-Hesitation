@@ -1,9 +1,6 @@
-import names from '../../utils/classNames.js';
-import {
-  _appendChilds,
-  _createElemWithAttr,
-} from '../../utils/customDOMMethods.js';
-import Input from './Input.js';
+import names from '@/utils/classNames';
+import { _appendChilds, _createElemWithAttr } from '@/utils/customDOMMethods';
+import Input from '@/components/common/Input';
 
 export default function Modal({
   $target = document.querySelector('#app'),

@@ -1,4 +1,4 @@
-import { _createElemWithAttr } from '../../utils/customDOMMethods.js';
+import { _createElemWithAttr } from '@/utils/customDOMMethods';
 
 export default function Input({
   $target,
