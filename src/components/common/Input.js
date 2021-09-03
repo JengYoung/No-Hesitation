@@ -1,10 +1,13 @@
+import { _createElemWithAttr } from '../../utils/customDOMMethods.js';
+
 export default function Input({
   $target,
+  classNames = [],
   placeholder,
   initialState,
   onChange,
 }) {
-  this.$input = document.createElement('input');
+  this.$input = _createElemWithAttr('input', classNames);
   this.$input.placeholder = placeholder;
   this.state = initialState;
 

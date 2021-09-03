@@ -5,12 +5,16 @@ const names = {
 
   // Block
   page: 'page',
+  mainPage: 'main-page',
+  postEditPage: 'post-edit-page',
   container: 'container',
   modalBlock: 'modal',
+  mainContainer: 'main-container',
   sideBarContainer: 'sidebar-container',
   postsBlock: 'posts',
   postBlock: 'post',
   headerBlock: 'header-container',
+  postForm: 'post-form',
 
   /* Element */
   //modal
@@ -41,6 +45,10 @@ const names = {
   postNow: 'post__now',
   postToggleBtn: 'post__toggle-btn',
   postRemoveBtn: 'post__remove-btn',
+
+  // postForm
+  postTitle: 'post-form__post-title',
+  editor: 'post-form__editor',
 
   // icon-size
   sz100: 'size-100',

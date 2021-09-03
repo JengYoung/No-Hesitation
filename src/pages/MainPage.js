@@ -15,10 +15,10 @@ export default function MainPage({
   initialState = { username: '', documents: [] },
   onClick,
 }) {
-  const { page } = names;
+  const { mainPage } = names;
   this.state = initialState;
 
-  const $page = _createElemWithAttr('div', [page]);
+  const $page = _createElemWithAttr('div', [mainPage]);
   const header = new Header({
     $target: $page,
     initialState: {

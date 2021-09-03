@@ -5,6 +5,10 @@ import { ROUTE_POST } from '../src/utils/constants.js';
 import { _removeAllChildNodes } from './utils/customDOMMethods.js';
 
 export default function App({ $target }) {
+  const onClick = id => {
+    history.pushState(null, null, ROUTE_POST + `/${id}`);
+    this.route();
+  };
   const postEditPage = new PostEditPage({
     $target,
     initialState: {
@@ -16,6 +20,7 @@ export default function App({ $target }) {
       createdAt: '',
       updatedAt: '',
     },
+    onClick,
   });
 
   const mainPage = new MainPage({
@@ -24,10 +29,7 @@ export default function App({ $target }) {
       username: 'jengyoung',
       documents: [],
     },
-    onClick: id => {
-      history.pushState(null, null, ROUTE_POST + `/${id}`);
-      this.route();
-    },
+    onClick,
   });
 
   this.route = () => {

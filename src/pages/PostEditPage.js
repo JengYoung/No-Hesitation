@@ -1,6 +1,11 @@
 import getPost from '../apis/route/post/getPost.js';
+import getPostList from '../apis/route/post/getPostList.js';
 import updatePost from '../apis/route/post/updatePost.js';
+import Header from '../components/Header.js';
 import PostForm from '../components/PostForm.js';
+import SideBar from '../components/SideBar.js';
+import names from '../utils/classNames.js';
+import { _createElemWithAttr } from '../utils/customDOMMethods.js';
 import debounce from '../utils/debounce.js';
 import { getItem, setItem } from '../utils/storage.js';
 /*
@@ -23,16 +28,33 @@ export default function PostEditPage({
     createdAt: '',
     updatedAt: '',
   },
+  onClick,
 }) {
-  const $page = document.createElement('div');
+  const { mainContainer, postEditPage } = names;
+  const $page = _createElemWithAttr('div', [postEditPage]);
+  const $container = _createElemWithAttr('div', [mainContainer]);
+  $page.appendChild($container);
+  console.log($page.children);
   this.state = initialState;
   const { id } = this.state;
 
   const defaultValue = { title: '', content: '' };
   const post = getItem(getLocalPostKey(id), defaultValue);
 
-  const postForm = new PostForm({
+  const header = new Header({
     $target: $page,
+    initialState: {
+      username: this.state.username,
+    },
+  });
+  const sideBar = new SideBar({
+    $target: $container,
+    initialState,
+    onClick,
+  });
+
+  const postForm = new PostForm({
+    $target: $container,
     initialState: {
       ...post,
     },
@@ -47,6 +69,7 @@ export default function PostEditPage({
       });
     }, 5000),
   });
+  console.log($page);
 
   // id가 바뀔 때 페이지의 상태가 변화합니다!
   this.setState = async nextState => {
@@ -55,6 +78,12 @@ export default function PostEditPage({
       ...nextState,
     };
     const { id, username } = this.state;
+    header.setState({ username });
+    sideBar.setState({
+      username,
+      documents: await getPostList(this.state.username),
+    });
+
     let post = getItem(getLocalPostKey(this.state.id), defaultValue);
     if (id) {
       post = await getPost(id, username);
@@ -67,6 +96,7 @@ export default function PostEditPage({
     if ($target.querySelector('form') === null) {
       postForm.render(); // 에디터의 경우 여기서 렌더링을 해줘야, setState할 때 다시 렌더링되지 않습니다.
     }
+    $page.appendChild($container);
     $target.appendChild($page);
   };
 }

@@ -2,16 +2,16 @@ import Post from '../components/Post.js';
 import names from './classNames.js';
 import { _appendChilds, _createElemWithAttr } from './customDOMMethods.js';
 
-const {
-  outlinedIcon,
-  addIcon,
-  sz150,
-  postNextNewText,
-  postNextNew,
-  postNextNewIcon,
-} = names;
 export default function renderPosts($parentNode, nowDocuments) {
-  // if (!nowDocuments.length) return;
+  const {
+    outlinedIcon,
+    addIcon,
+    sz150,
+    postNextNewText,
+    postNextNew,
+    postNextNewIcon,
+  } = names;
+
   if (!nowDocuments.length) {
     const $postNextNew = _createElemWithAttr('div', [postNextNew]);
 

@@ -1,3 +1,5 @@
+import names from '../utils/classNames.js';
+import { _createElemWithAttr } from '../utils/customDOMMethods.js';
 import Input from './common/Input.js';
 
 export default function PostForm({
@@ -10,7 +12,9 @@ export default function PostForm({
   onUpdate,
 }) {
   // 초기 컴포넌트를 DOM에 추가하고, 상태를 초기화합니다.
-  const $editor = document.createElement('form');
+  const { postForm, postTitle: postTitleClassName, editor } = names;
+
+  const $postForm = _createElemWithAttr('form', [postForm]);
   /*
    * this.state = {
    *   title: string
@@ -23,7 +27,8 @@ export default function PostForm({
    *            component              *
    *************************************/
   const postTitle = new Input({
-    $target: $editor,
+    $target: $postForm,
+    classNames: [postTitleClassName],
     initialState: { title: this.state.title },
     onChange: async ({ title }) => {
       const nextState = {
@@ -36,7 +41,7 @@ export default function PostForm({
       await onUpdate(this.state);
     },
   });
-  const $postContent = document.createElement('textarea');
+  const $editor = _createElemWithAttr('textarea', [editor]);
 
   this.setState = nextState => {
     this.state = {
@@ -44,16 +49,17 @@ export default function PostForm({
       ...nextState,
     };
     const { content } = this.state;
-    $postContent.value = content;
+    $editor.value = content;
     postTitle.setState({ title: this.state.title });
   };
 
   this.render = () => {
-    $editor.appendChild($postContent);
-    $target.appendChild($editor);
+    $postForm.appendChild($editor);
+    $target.appendChild($postForm);
+    console.log('target', $target);
   };
 
-  $postContent.addEventListener('keyup', async e => {
+  $editor.addEventListener('keyup', async e => {
     this.setState({
       ...this.state,
       content: e.target.value,

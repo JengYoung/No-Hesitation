@@ -1,7 +1,8 @@
 @import 'normalize.css';
-@import "./component/sidebar.scss";
-@import "./component/common/modal.scss";
-@import "./component/header.scss";
+@import "./color";
+@import "./mixin";
+@import "./pages/pages";
+@import "./component/component";
 
 html {
   font-size: 16px;
