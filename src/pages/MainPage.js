@@ -17,7 +17,6 @@ export default function MainPage({
 }) {
   const { mainPage } = names;
   this.state = initialState;
-
   const $page = _createElemWithAttr('div', [mainPage]);
   const header = new Header({
     $target: $page,

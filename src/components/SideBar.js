@@ -2,8 +2,8 @@ import classNames from '@/utils/classNames';
 import {
   _removeAllChildNodes,
   _createElemWithAttr,
+  _renderPosts,
 } from '@/utils/customDOMMethods';
-import renderPosts from '@/utils/renderPosts';
 import names from '@/utils/classNames';
 import createPost from '@/apis/route/post/createPost';
 import Modal from '@/components/common/Modal';
@@ -12,6 +12,7 @@ import { ERROR_STATUS } from '@/utils/constants';
 import deletePost from '@/apis/route/post/deletePost';
 import getPostList from '@/apis/route/post/getPostList';
 import Button from '@/components/common/Button';
+import checkState from '@/utils/checkState';
 
 /*
   {
@@ -70,12 +71,12 @@ export default function SideBar({ $target, initialState, onClick }) {
   $sideBar.appendChild($sideBarButtonBox);
 
   this.setState = nextState => {
-    if (JSON.stringify(this.state) !== JSON.stringify(nextState)) {
+    if (!checkState(this.state, nextState)) {
       _removeAllChildNodes($posts);
       this.state = nextState;
       const { documents } = this.state;
       const $fragment = new DocumentFragment();
-      renderPosts($fragment, documents);
+      _renderPosts($fragment, documents);
       $posts.appendChild($fragment);
       $sideBar.appendChild($posts);
     }

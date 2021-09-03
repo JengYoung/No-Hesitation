@@ -41,6 +41,10 @@ export default function PostEditPage({
   const defaultValue = { title: '', content: '' };
   const post = getItem(getLocalPostKey(id), defaultValue);
 
+  /***************************************
+   *             components              *
+   ***************************************/
+
   const header = new Header({
     $target: $page,
     initialState: {
@@ -69,7 +73,6 @@ export default function PostEditPage({
       });
     }, 5000),
   });
-  console.log($page);
 
   // id가 바뀔 때 페이지의 상태가 변화합니다!
   this.setState = async nextState => {
