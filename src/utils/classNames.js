@@ -17,8 +17,14 @@ const names = {
   postForm: 'post-form',
 
   /* Element */
-  //modal
+
+  //header
+  logoBox: 'header__logo-box',
+  logo: 'logo-box__logo',
+  nameLogo: 'logo-box__name-logo',
   userInfo: 'header__user-info',
+
+  //modal
   usernameMark: 'user-info__username-mark',
   modalConformButton: 'modal__conform-btn',
   modalCancelButton: 'modal__cancel-btn',
@@ -43,7 +49,9 @@ const names = {
   // post
   postLink: 'post__link',
   postNow: 'post__now',
+  postButtonBox: 'post__btn-box',
   postToggleBtn: 'post__toggle-btn',
+  postCreateBtn: 'post__create-btn',
   postRemoveBtn: 'post__remove-btn',
 
   // postForm

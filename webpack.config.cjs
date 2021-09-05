@@ -81,5 +81,5 @@ module.exports = env => ({
     new MiniCssExtractPlugin({ filename: 'css/style.css' }),
   ],
   devtool: 'source-map',
-  mode: 'development',
+  mode: 'none',
 });

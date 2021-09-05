@@ -23,6 +23,7 @@ import checkState from '@/utils/checkState';
 
 export default function SideBar({ $target, initialState, onClick }) {
   const {
+    container,
     postsItem,
     postsBlock,
     sideBarItem,
@@ -33,6 +34,7 @@ export default function SideBar({ $target, initialState, onClick }) {
     postNext,
     postLink,
     postNextNew,
+    postCreateBtn,
     postRemoveBtn,
   } = names;
 
@@ -134,16 +136,44 @@ export default function SideBar({ $target, initialState, onClick }) {
   });
 
   $sideBar.addEventListener('click', e => {
+    if (!e.target.classList.contains(postCreateBtn)) return;
+    const $app = document.querySelector('#app');
+    const closestPostsItem = e.target.closest(`.${postsItem}`);
+    const modal = new Modal({
+      $target: document.querySelector('#app'),
+      head: '생성할 페이지의 제목을 입력해주세요!',
+      isInput: true,
+      onConform: async title => {
+        try {
+          const result = await createPost(this.state.username, {
+            title,
+            parent: closestPostsItem.dataset.id,
+          });
+          push(`/posts/${result.id}`);
+        } catch (e) {
+          console.error(e);
+          alert(ERROR_STATUS, e);
+        } finally {
+          if ($app.querySelector(`.${container}`)) {
+            $app.removeChild(modal.$container);
+          }
+        }
+      },
+    });
+    modal.render();
+  });
+
+  $sideBar.addEventListener('click', e => {
     if (!e.target.classList.contains(postRemoveBtn)) return;
     const $app = document.querySelector('#app');
-    const closestPostNext = e.target.closest(`.${postsItem}`);
+    const closestPostsItem = e.target.closest(`.${postsItem}`);
     const modal = new Modal({
       $target: document.querySelector('#app'),
       head: '정말로 삭제하시겠어요?',
       isInput: false,
       onConform: async () => {
         try {
-          await deletePost(this.state.username, closestPostNext.dataset.id);
+          await deletePost(this.state.username, closestPostsItem.dataset.id);
           const posts = await getPostList(this.state.username);
           this.setState({
             documents: posts,
@@ -152,7 +182,9 @@ export default function SideBar({ $target, initialState, onClick }) {
           console.error(e);
           alert(ERROR_STATUS, e);
         } finally {
-          $app.removeChild(modal.$container);
+          if ($app.querySelector(`.${container}`)) {
+            $app.removeChild(modal.$container);
+          }
         }
       },
     });

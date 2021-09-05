@@ -4,22 +4,26 @@ import { _appendChilds, _createElemWithAttr } from '@/utils/customDOMMethods';
 /*
   id, title
 */
-const {
-  postsItem,
-  postToggleBtn,
-  postRemoveBtn,
-  postLink,
-  postBlock,
-  postNext,
-  outlinedIcon,
-  sharpIcon,
-  sz150,
-  sz175,
-  arrowRightIcon,
-  removePostIcon,
-} = names;
 
 export default function Post({ $target, initialState }) {
+  const {
+    postsItem,
+    postToggleBtn,
+    postButtonBox,
+    postCreateBtn,
+    postRemoveBtn,
+    postLink,
+    postBlock,
+    postNext,
+    sz150,
+    sz175,
+    outlinedIcon,
+    sharpIcon,
+    arrowRightIcon,
+    removePostIcon,
+    addIcon,
+  } = names;
+
   this.state = initialState;
   const { id, title } = this.state;
 
@@ -33,21 +37,32 @@ export default function Post({ $target, initialState }) {
 
   this.$postLink = _createElemWithAttr('a', [postLink], title);
   this.$postLink.dataset['id'] = id;
-
+  this.$postButtonBox = _createElemWithAttr('div', [postButtonBox]);
+  this.$postCreateButton = _createElemWithAttr(
+    'button',
+    [postCreateBtn, outlinedIcon, sz150],
+    addIcon,
+  );
   this.$postRemoveButton = _createElemWithAttr(
     'button',
     [postRemoveBtn, sharpIcon, sz150],
     removePostIcon,
   );
-  this.$postNext = _createElemWithAttr('section', [postNext]);
-  this.$postNext.dataset['id'] = id;
 
+  _appendChilds(
+    this.$postButtonBox,
+    this.$postCreateButton,
+    this.$postRemoveButton,
+  );
   _appendChilds(
     this.$post, // append 대상
     this.$postToggleButton,
     this.$postLink,
-    this.$postRemoveButton,
+    this.$postButtonBox,
   );
+
+  this.$postNext = _createElemWithAttr('section', [postNext]);
+  this.$postNext.dataset['id'] = id;
 
   this.render = () => {
     $target.appendChild(this.$post);

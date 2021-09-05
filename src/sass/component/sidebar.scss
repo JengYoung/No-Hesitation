@@ -50,7 +50,11 @@
           color: $mint500;
         }
       }
-      &__remove-btn {
+      &__btn-box {
+        display: flex;
+        align-items: center;
+        width: 3rem;
+        flex-shrink: 0;
         margin-left: auto;
         &:hover {
           color:  $red300;
