@@ -56,8 +56,11 @@
         width: 3rem;
         flex-shrink: 0;
         margin-left: auto;
-        &:hover {
-          color:  $red300;
+        .post__create-btn,
+        .post__remove-btn {
+          &:hover {
+            color:  $red300;
+          }
         }
       }
       &__new-button {

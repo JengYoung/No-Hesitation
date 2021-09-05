@@ -1,4 +1,3 @@
-import classNames from '@/utils/classNames';
 import {
   _removeAllChildNodes,
   _createElemWithAttr,
@@ -6,13 +5,17 @@ import {
 } from '@/utils/customDOMMethods';
 import names from '@/utils/classNames';
 import createPost from '@/apis/route/post/createPost';
-import Modal from '@/components/common/Modal';
 import { push } from '@/apis/router';
-import { ERROR_STATUS } from '@/utils/constants';
 import deletePost from '@/apis/route/post/deletePost';
 import getPostList from '@/apis/route/post/getPostList';
 import Button from '@/components/common/Button';
 import checkState from '@/utils/checkState';
+import renderModalByEvent from '@/utils/renderModalByEvent';
+import {
+  BUTTON_COMPONENT_TEXT,
+  INPUT_TITLE_MESSAGE,
+  MODAL_DELETE_QUESTION,
+} from '@/utils/constants';
 
 /*
   {
@@ -23,7 +26,7 @@ import checkState from '@/utils/checkState';
 
 export default function SideBar({ $target, initialState, onClick }) {
   const {
-    container,
+    sideBarContainer,
     postsItem,
     postsBlock,
     sideBarItem,
@@ -38,37 +41,18 @@ export default function SideBar({ $target, initialState, onClick }) {
     postRemoveBtn,
   } = names;
 
-  const $sideBar = document.createElement('nav');
-  $sideBar.className = classNames.sideBarContainer;
-
+  const $sideBar = _createElemWithAttr('nav', [sideBarContainer]);
   const $posts = _createElemWithAttr('section', [sideBarItem, postsBlock]);
   this.state = initialState;
 
   const $sideBarButtonBox = _createElemWithAttr('div', [sideBarButtonBox]);
   new Button({
     $target: $sideBarButtonBox,
-    attributes: { classNames: [sideBarCreatePostBtn], text: '페이지 생성' },
-    onClick: () => {
-      const $app = document.querySelector('#app');
-      const modal = new Modal({
-        $target: $app,
-        head: '생성할 페이지의 제목을 입력해주세요!',
-        isInput: true,
-        onConform: async title => {
-          try {
-            const result = await createPost(this.state.username, {
-              title,
-              parent: null,
-            });
-            push(`/posts/${result.id}`);
-          } catch (e) {
-            console.error(e);
-            alert(ERROR_STATUS, e);
-          }
-        },
-      });
-      modal.render();
+    attributes: {
+      classNames: [sideBarCreatePostBtn],
+      text: BUTTON_COMPONENT_TEXT,
     },
+    onClick: () => openCreatePageModal(),
   });
   $sideBar.appendChild($sideBarButtonBox);
 
@@ -86,7 +70,9 @@ export default function SideBar({ $target, initialState, onClick }) {
   };
 
   this.render = () => {
-    $target.appendChild($sideBar);
+    if (!$target.querySelector(`${sideBarContainer}`)) {
+      $target.appendChild($sideBar);
+    }
   };
 
   $sideBar.addEventListener('click', e => {
@@ -111,83 +97,54 @@ export default function SideBar({ $target, initialState, onClick }) {
   });
 
   $sideBar.addEventListener('click', e => {
-    const closestPostNextNew = e.target.closest(`.${postNextNew}`);
-    if (!closestPostNextNew) return;
-    const $app = document.querySelector('#app');
-    const closestPostNext = e.target.closest(`.${postNext}`);
-    const modal = new Modal({
-      $target: $app,
-      head: '생성할 페이지의 제목을 입력해주세요!',
-      isInput: true,
-      onConform: async title => {
-        try {
-          const result = await createPost(this.state.username, {
-            title,
-            parent: closestPostNext.dataset.id,
-          });
-          push(`/posts/${result.id}`);
-        } catch (e) {
-          console.error(e);
-          alert(ERROR_STATUS, e);
-        }
-      },
+    renderModal({
+      eventTarget: e.target,
+      isValid: e.target.closest(`.${postNextNew}`),
+      closestSelectorName: postNext,
     });
-    modal.render();
   });
 
   $sideBar.addEventListener('click', e => {
-    if (!e.target.classList.contains(postCreateBtn)) return;
-    const $app = document.querySelector('#app');
-    const closestPostsItem = e.target.closest(`.${postsItem}`);
-    const modal = new Modal({
-      $target: document.querySelector('#app'),
-      head: '생성할 페이지의 제목을 입력해주세요!',
-      isInput: true,
-      onConform: async title => {
-        try {
-          const result = await createPost(this.state.username, {
-            title,
-            parent: closestPostsItem.dataset.id,
-          });
-          push(`/posts/${result.id}`);
-        } catch (e) {
-          console.error(e);
-          alert(ERROR_STATUS, e);
-        } finally {
-          if ($app.querySelector(`.${container}`)) {
-            $app.removeChild(modal.$container);
-          }
-        }
-      },
+    renderModal({
+      eventTarget: e.target,
+      isValid: e.target.classList.contains(postCreateBtn),
+      closestSelectorName: postsItem,
     });
-    modal.render();
   });
 
   $sideBar.addEventListener('click', e => {
     if (!e.target.classList.contains(postRemoveBtn)) return;
-    const $app = document.querySelector('#app');
     const closestPostsItem = e.target.closest(`.${postsItem}`);
-    const modal = new Modal({
-      $target: document.querySelector('#app'),
-      head: '정말로 삭제하시겠어요?',
+    renderModalByEvent({
+      head: MODAL_DELETE_QUESTION,
       isInput: false,
-      onConform: async () => {
-        try {
-          await deletePost(this.state.username, closestPostsItem.dataset.id);
-          const posts = await getPostList(this.state.username);
-          this.setState({
-            documents: posts,
-          });
-        } catch (e) {
-          console.error(e);
-          alert(ERROR_STATUS, e);
-        } finally {
-          if ($app.querySelector(`.${container}`)) {
-            $app.removeChild(modal.$container);
-          }
-        }
+      tryFunc: async () => {
+        await deletePost(this.state.username, closestPostsItem.dataset.id);
+        const posts = await getPostList(this.state.username);
+        this.setState({
+          documents: posts,
+        });
       },
     });
-    modal.render();
   });
+
+  const renderModal = async ({ eventTarget, isValid, closestSelectorName }) => {
+    if (!isValid) return;
+    const $elem = eventTarget.closest(`.${closestSelectorName}`);
+    await openCreatePageModal($elem);
+  };
+
+  const openCreatePageModal = async $elem => {
+    renderModalByEvent({
+      head: INPUT_TITLE_MESSAGE,
+      isInput: true,
+      tryFunc: async title => {
+        const result = await createPost(this.state.username, {
+          title,
+          parent: $elem?.dataset.id ?? null,
+        });
+        push(`/posts/${result.id}`);
+      },
+    });
+  };
 }
