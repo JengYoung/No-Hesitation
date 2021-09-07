@@ -68,3 +68,8 @@ export const _renderPosts = ($parentNode, nowDocuments) => {
     _renderPosts(post.$postNext, nextDocs);
   });
 };
+
+export const _renderChild = ($parent, $target, targetSelector) => {
+  if ($parent.querySelector(targetSelector)) return;
+  $parent.appendChild($target);
+};

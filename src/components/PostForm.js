@@ -61,7 +61,7 @@ export default function PostForm({
     $postForm.appendChild($editor);
     $target.appendChild($postForm);
   };
-
+  this.render();
   $editor.addEventListener('keyup', async e => {
     this.setState({
       ...this.state,

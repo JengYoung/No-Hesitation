@@ -1,5 +1,9 @@
 import names from '@/utils/classNames';
-import { _appendChilds, _createElemWithAttr } from '@/utils/customDOMMethods';
+import {
+  _appendChilds,
+  _createElemWithAttr,
+  _renderChild,
+} from '@/utils/customDOMMethods';
 
 /*
   id, title
@@ -65,8 +69,8 @@ export default function Post({ $target, initialState }) {
   this.$postNext.dataset['id'] = id;
 
   this.render = () => {
-    $target.appendChild(this.$post);
-    $target.appendChild(this.$postNext);
+    _renderChild($target, this.$post, postsItem);
+    _renderChild($target, this.$postNext, postNext);
   };
 
   this.render();

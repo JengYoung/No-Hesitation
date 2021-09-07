@@ -2,7 +2,7 @@ import Modal from '@/components/common/Modal';
 import names from '@/utils/classNames';
 import { ERROR_STATUS } from '@/utils/constants';
 
-const renderModalByEvent = ({ head, isInput, tryFunc }) => {
+export const renderModalByEvent = ({ head, isInput, tryFunc }) => {
   const { container } = names;
   const $app = document.querySelector('#app');
   const modal = new Modal({
@@ -24,5 +24,3 @@ const renderModalByEvent = ({ head, isInput, tryFunc }) => {
   });
   modal.render();
 };
-
-export default renderModalByEvent;

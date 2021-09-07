@@ -10,7 +10,7 @@ import deletePost from '@/apis/route/post/deletePost';
 import getPostList from '@/apis/route/post/getPostList';
 import Button from '@/components/common/Button';
 import checkState from '@/utils/checkState';
-import renderModalByEvent from '@/utils/renderModalByEvent';
+import { renderModalByEvent } from '@/utils/renderComponentMethods';
 import {
   BUTTON_COMPONENT_TEXT,
   INPUT_TITLE_MESSAGE,
@@ -76,11 +76,8 @@ export default function SideBar({ $target, initialState, onClick }) {
   };
 
   $sideBar.addEventListener('click', e => {
-    if (
-      !e.target.classList.contains(postsItem) &&
-      !e.target.classList.contains(postLink)
-    )
-      return;
+    const { classList } = e.target;
+    if (!classList.contains(postsItem) && !classList.contains(postLink)) return;
     const postId = e.target.closest(`.${postsItem}`).getAttribute(['data-id']);
     onClick(postId);
   });

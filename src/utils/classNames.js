@@ -11,6 +11,7 @@ const names = {
   modalBlock: 'modal',
   mainContainer: 'main-container',
   sideBarContainer: 'sidebar-container',
+  modalContainer: 'modal-container',
   postsBlock: 'posts',
   postBlock: 'post',
   headerBlock: 'header-container',

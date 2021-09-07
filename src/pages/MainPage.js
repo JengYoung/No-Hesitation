@@ -2,7 +2,7 @@ import getPostList from '@/apis/route/post/getPostList';
 import Header from '@/components/Header';
 import SideBar from '@/components/SideBar';
 import names from '@/utils/classNames';
-import { _createElemWithAttr } from '@/utils/customDOMMethods';
+import { _createElemWithAttr, _renderChild } from '@/utils/customDOMMethods';
 
 /*
   {
@@ -48,6 +48,6 @@ export default function MainPage({
   };
 
   this.render = () => {
-    $target.appendChild($page);
+    _renderChild($target, $page, mainPage);
   };
 }

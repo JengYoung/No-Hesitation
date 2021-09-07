@@ -1,7 +1,11 @@
 import { push } from '@/apis/router';
 import checkState from '@/utils/checkState';
 import names from '@/utils/classNames';
-import { _createElemWithAttr, _appendChilds } from '@/utils/customDOMMethods';
+import {
+  _createElemWithAttr,
+  _appendChilds,
+  _renderChild,
+} from '@/utils/customDOMMethods';
 
 export default function Header({
   $target,
@@ -12,7 +16,6 @@ export default function Header({
   this.state = initialState; // 아직은 로그인, 로그아웃 기능을 구현하지 않았네요...!
 
   const { LOGO_URL } = process.env;
-  console.log(LOGO_URL);
   const { headerBlock, logo, logoBox, userInfo, usernameMark, nameLogo } =
     names;
   const $header = _createElemWithAttr('header', [headerBlock]);
@@ -42,9 +45,7 @@ export default function Header({
   };
 
   this.render = () => {
-    if (!$target.querySelector(`.${headerBlock}`)) {
-      $target.appendChild($header);
-    }
+    _renderChild($target, $header, headerBlock);
   };
 
   $logoBox.addEventListener('click', () => {

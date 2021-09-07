@@ -9,7 +9,7 @@ import Header from '@/components/Header';
 import PostForm from '@/components/PostForm';
 import SideBar from '@/components/SideBar';
 import names from '@/utils/classNames';
-import { _createElemWithAttr } from '@/utils/customDOMMethods';
+import { _createElemWithAttr, _renderChild } from '@/utils/customDOMMethods';
 import debounce from '@/utils/debounce';
 import { getItem, setItem } from '@/utils/storage';
 /*
@@ -103,11 +103,9 @@ export default function PostEditPage({
   };
 
   this.render = () => {
-    if ($target.querySelector('form') === null) {
-      postForm.render(); // 에디터의 경우 여기서 렌더링을 해줘야, setState할 때 다시 렌더링되지 않습니다.
-    }
-    $page.appendChild($container);
-    $target.appendChild($page);
+    if (!$target.querySelector('form')) postForm.render(); // 에디터의 경우 여기서 렌더링을 해줘야, setState할 때 다시 렌더링되지 않습니다.
+    _renderChild($page, $container, mainContainer);
+    _renderChild($target, $page, postEditPage);
   };
 
   updateTitleDispatcher();
