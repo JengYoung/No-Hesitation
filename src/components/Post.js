@@ -78,8 +78,8 @@ export default function Post({ $target, initialState, isSidebar }) {
   this.$postNext.dataset['id'] = id;
 
   this.render = () => {
-    _renderChild($target, this.$post, postsItem);
-    _renderChild($target, this.$postNext, postNext);
+    $target.appendChild(this.$post);
+    $target.appendChild(this.$postNext);
   };
 
   this.render();

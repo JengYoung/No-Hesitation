@@ -12,7 +12,7 @@ import names from '@/utils/classNames';
 import { _createElemWithAttr, _renderChild } from '@/utils/customDOMMethods';
 import debounce from '@/utils/debounce';
 import { getItem, setItem } from '@/utils/storage';
-import SubPosts from '@/components/post/SubPosts';
+import SubPosts from '@/components/posts/SubPosts';
 /*
  this.state = {
     id: 'new',
@@ -120,10 +120,6 @@ export default function PostEditPage({
   };
 
   this.render = () => {
-    if (!$target.querySelector('form')) {
-      postForm.render();
-      subPosts.render();
-    } // 에디터의 경우 여기서 렌더링을 해줘야, setState할 때 다시 렌더링되지 않습니다.
     _renderChild($container, $postEditContainer, postEditContainer);
     _renderChild($page, $container, mainContainer);
     _renderChild($target, $page, postEditPage);

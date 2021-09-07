@@ -35,6 +35,7 @@ export default function SubPosts({
   this.render = () => {
     _renderChild($target, $subPosts);
   };
+
   togglePosts($subPosts);
   clickPosts($subPosts, onClick);
 }

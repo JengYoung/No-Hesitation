@@ -71,6 +71,6 @@ export const _renderPosts = ($parentNode, nowDocuments, isSidebar = true) => {
 };
 
 export const _renderChild = ($parent, $target, targetSelector) => {
-  if ($parent.querySelector(targetSelector)) return;
+  if ($parent.querySelector(`.${targetSelector}`)) return;
   $parent.appendChild($target);
 };

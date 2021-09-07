@@ -2,6 +2,7 @@ import {
   _removeAllChildNodes,
   _createElemWithAttr,
   _renderPosts,
+  _renderChild,
 } from '@/utils/customDOMMethods';
 import names from '@/utils/classNames';
 import createPost from '@/apis/route/post/createPost';
@@ -58,28 +59,26 @@ export default function SideBar({ $target, initialState, onClick }) {
     if (!checkState(this.state, nextState)) {
       _removeAllChildNodes($posts);
       this.state = nextState;
-      const { documents } = this.state;
       const $fragment = new DocumentFragment();
-      _renderPosts($fragment, documents);
+      _renderPosts($fragment, this.state.documents);
       $posts.appendChild($fragment);
-      $sideBar.appendChild($posts);
+      this.render();
     }
-    this.render();
   };
 
   this.render = () => {
-    if (!$target.querySelector(`${sideBarContainer}`)) {
-      $target.appendChild($sideBar);
-    }
+    _renderChild($sideBar, $posts, sideBarItem);
+    _renderChild($target, $sideBar, sideBarContainer);
   };
+  this.render();
 
-  // click page
+  // click post
   clickPosts($sideBar, onClick);
 
   //toggle
   togglePosts($posts);
 
-  // create page
+  // create post
   $sideBar.addEventListener('click', e => {
     renderModal({
       eventTarget: e.target,
@@ -88,7 +87,7 @@ export default function SideBar({ $target, initialState, onClick }) {
     });
   });
 
-  // create page
+  // create post
   $sideBar.addEventListener('click', e => {
     renderModal({
       eventTarget: e.target,
@@ -97,7 +96,7 @@ export default function SideBar({ $target, initialState, onClick }) {
     });
   });
 
-  //
+  // delete post
   $sideBar.addEventListener('click', e => {
     if (!e.target.classList.contains(postRemoveBtn)) return;
     const closestPostsItem = e.target.closest(`.${postsItem}`);

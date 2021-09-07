@@ -62,6 +62,7 @@ export default function Modal({
   };
 
   const onCancel = () => {
+    if (!$target.querySelector(`.${modalContainer}`)) return;
     $target.removeChild(this.$container);
   };
 
