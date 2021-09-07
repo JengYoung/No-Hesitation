@@ -16,6 +16,7 @@ import {
   INPUT_TITLE_MESSAGE,
   MODAL_DELETE_QUESTION,
 } from '@/utils/constants';
+import { clickPosts, togglePosts } from '@/utils/customEvent';
 
 /*
   {
@@ -32,10 +33,7 @@ export default function SideBar({ $target, initialState, onClick }) {
     sideBarItem,
     sideBarButtonBox,
     sideBarCreatePostBtn,
-    postBlock,
-    postToggleBtn,
     postNext,
-    postLink,
     postNextNew,
     postCreateBtn,
     postRemoveBtn,
@@ -75,25 +73,11 @@ export default function SideBar({ $target, initialState, onClick }) {
     }
   };
 
-  // create page
-  $sideBar.addEventListener('click', e => {
-    const { classList } = e.target;
-    if (!classList.contains(postsItem) && !classList.contains(postLink)) return;
-    const postId = e.target.closest(`.${postsItem}`).getAttribute(['data-id']);
-    onClick(postId);
-  });
+  // click page
+  clickPosts($sideBar, onClick);
 
   //toggle
-  $posts.addEventListener('click', e => {
-    const { target } = e;
-    if (!target.classList.contains(postToggleBtn, 'post__link')) return;
-    const closestPostId = target.closest(`.${postBlock}`).dataset.id;
-    const $nextItem = $posts.querySelector(
-      `.${postNext}[data-id="${closestPostId}"]`,
-    );
-    $nextItem.classList.toggle('invisible');
-    target.classList.toggle('toggle');
-  });
+  togglePosts($posts);
 
   // create page
   $sideBar.addEventListener('click', e => {

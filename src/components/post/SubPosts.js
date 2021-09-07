@@ -6,13 +6,14 @@ import {
   _renderChild,
   _renderPosts,
 } from '@/utils/customDOMMethods';
-import { togglePosts } from '@/utils/customEvent';
+import { clickPosts, togglePosts } from '@/utils/customEvent';
 
 export default function SubPosts({
   $target,
   initialState = {
     documents: [],
   },
+  onClick,
 }) {
   this.state = initialState;
   const { subPostsBlock } = names;
@@ -35,4 +36,5 @@ export default function SubPosts({
     _renderChild($target, $subPosts);
   };
   togglePosts($subPosts);
+  clickPosts($subPosts, onClick);
 }

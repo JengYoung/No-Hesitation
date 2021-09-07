@@ -34,3 +34,13 @@ export const togglePosts = $target => {
     target.classList.toggle('toggle');
   });
 };
+
+export const clickPosts = ($target, onClickCallback) => {
+  const { postsItem, postLink } = names;
+  $target.addEventListener('click', e => {
+    const { classList } = e.target;
+    if (!classList.contains(postsItem) && !classList.contains(postLink)) return;
+    const postId = e.target.closest(`.${postsItem}`).getAttribute(['data-id']);
+    onClickCallback(postId);
+  });
+};

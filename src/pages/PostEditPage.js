@@ -92,6 +92,7 @@ export default function PostEditPage({
     initialState: {
       documents: [],
     },
+    onClick,
   });
 
   // id가 바뀔 때 페이지의 상태가 변화합니다!
