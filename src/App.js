@@ -3,6 +3,7 @@ import MainPage from '@/pages/MainPage';
 import PostEditPage from '@/pages/PostEditPage';
 import { ROUTE_POST } from '@/utils/constants';
 import { _removeAllChildNodes } from '@/utils/customDOMMethods';
+import getPost from '@/apis/route/post/getPost';
 
 export default function App({ $target }) {
   const onClick = id => {
@@ -32,7 +33,7 @@ export default function App({ $target }) {
     onClick,
   });
 
-  this.route = () => {
+  this.route = async () => {
     _removeAllChildNodes($target); // App 초기화
     const { pathname } = window.location;
     const splitedPath = pathname.split('/');
@@ -41,11 +42,11 @@ export default function App({ $target }) {
       mainPage.setState();
     } else if (pathname.indexOf(ROUTE_POST + '/') === 0) {
       const postId = splitedPath[2];
-      postEditPage.setState({ id: postId });
+      postEditPage.setState(await getPost(postId, 'jengyoung'));
     }
   };
 
   this.route();
 
-  router(() => this.route());
+  router(async () => await this.route());
 }

@@ -75,6 +75,7 @@ export default function SideBar({ $target, initialState, onClick }) {
     }
   };
 
+  // create page
   $sideBar.addEventListener('click', e => {
     const { classList } = e.target;
     if (!classList.contains(postsItem) && !classList.contains(postLink)) return;
@@ -82,6 +83,7 @@ export default function SideBar({ $target, initialState, onClick }) {
     onClick(postId);
   });
 
+  //toggle
   $posts.addEventListener('click', e => {
     const { target } = e;
     if (!target.classList.contains(postToggleBtn, 'post__link')) return;
@@ -93,6 +95,7 @@ export default function SideBar({ $target, initialState, onClick }) {
     target.classList.toggle('toggle');
   });
 
+  // create page
   $sideBar.addEventListener('click', e => {
     renderModal({
       eventTarget: e.target,
@@ -101,6 +104,7 @@ export default function SideBar({ $target, initialState, onClick }) {
     });
   });
 
+  // create page
   $sideBar.addEventListener('click', e => {
     renderModal({
       eventTarget: e.target,
@@ -109,6 +113,7 @@ export default function SideBar({ $target, initialState, onClick }) {
     });
   });
 
+  //
   $sideBar.addEventListener('click', e => {
     if (!e.target.classList.contains(postRemoveBtn)) return;
     const closestPostsItem = e.target.closest(`.${postsItem}`);

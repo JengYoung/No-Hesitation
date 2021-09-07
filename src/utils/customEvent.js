@@ -20,3 +20,17 @@ export const dispatchUpdateTitle = ({ id, title }) => {
     }),
   );
 };
+
+export const togglePosts = $target => {
+  $target.addEventListener('click', e => {
+    const { postToggleBtn, postBlock, postNext } = names;
+    const { target } = e;
+    if (!target.classList.contains(postToggleBtn, 'post__link')) return;
+    const closestPostId = target.closest(`.${postBlock}`).dataset.id;
+    const $nextItem = $target.querySelector(
+      `.${postNext}[data-id="${closestPostId}"]`,
+    );
+    $nextItem.classList.toggle('invisible');
+    target.classList.toggle('toggle');
+  });
+};

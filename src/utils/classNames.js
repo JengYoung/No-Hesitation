@@ -11,6 +11,7 @@ const names = {
   modalBlock: 'modal',
   mainContainer: 'main-container',
   sideBarContainer: 'sidebar-container',
+  postEditContainer: 'post-edit-container',
   modalContainer: 'modal-container',
   postsBlock: 'posts',
   postBlock: 'post',
@@ -76,6 +77,9 @@ const names = {
   clearIcon: 'clear',
   createPostIcon: 'create',
   removePostIcon: 'delete',
+
+  // sub-document
+  subPostsBlock: 'sub-posts',
 };
 
 export default names;

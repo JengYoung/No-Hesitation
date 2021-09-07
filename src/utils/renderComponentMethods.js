@@ -2,6 +2,7 @@ import Modal from '@/components/common/Modal';
 import names from '@/utils/classNames';
 import { ERROR_STATUS } from '@/utils/constants';
 
+// modal;
 export const renderModalByEvent = ({ head, isInput, tryFunc }) => {
   const { container } = names;
   const $app = document.querySelector('#app');

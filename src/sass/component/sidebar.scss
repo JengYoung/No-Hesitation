@@ -1,7 +1,6 @@
 @import "@/sass/_variables";
 
-.sidebar-container {
-  // position: fixed;
+.sidebar-container {  
   top: $headerHeight;
   width: 300px;
   height: calc(100vh - #{$headerHeight});

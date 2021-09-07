@@ -9,3 +9,68 @@
     transform: scale(1.1);
   }
 }
+
+@mixin _posts() {
+  width: 100%;
+  .post {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: {
+      right: auto;
+      bottom: 0.5rem;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    &__link {
+      text-decoration: none;
+      color: black;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      &:hover {
+        color: $mint500;
+      }
+    }
+    &__toggle-btn {
+      transition: all 0.3s;
+      &:hover {
+        color: $mint500;
+      }
+    }
+    &__btn-box {
+      display: flex;
+      align-items: center;
+      width: 3rem;
+      flex-shrink: 0;
+      margin-left: auto;
+      .post__create-btn,
+      .post__remove-btn {
+        &:hover {
+          color:  $red300;
+        }
+      }
+    }
+    &__new-button {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .post-next {
+    padding-left: 1.375rem;
+    &__new {
+      display: flex;
+      align-items: center;
+      transition: all 0.3s;
+      margin-bottom: 1rem;
+      &:hover {
+        cursor: pointer;
+        color: $mint500;
+      }
+    }
+    &__new-icon {
+      margin-right: 0.25rem;
+    }
+  }
+}

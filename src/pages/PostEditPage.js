@@ -12,6 +12,7 @@ import names from '@/utils/classNames';
 import { _createElemWithAttr, _renderChild } from '@/utils/customDOMMethods';
 import debounce from '@/utils/debounce';
 import { getItem, setItem } from '@/utils/storage';
+import SubPosts from '@/components/post/SubPosts';
 /*
  this.state = {
     id: 'new',
@@ -34,10 +35,12 @@ export default function PostEditPage({
   },
   onClick,
 }) {
-  const { mainContainer, postEditPage } = names;
+  const { mainContainer, postEditPage, postEditContainer } = names;
   const $page = _createElemWithAttr('div', [postEditPage]);
   const $container = _createElemWithAttr('div', [mainContainer]);
-  $page.appendChild($container);
+  const $postEditContainer = _createElemWithAttr('section', [
+    postEditContainer,
+  ]);
   this.state = initialState;
   const { id } = this.state;
 
@@ -54,14 +57,17 @@ export default function PostEditPage({
       username: this.state.username,
     },
   });
+
   const sideBar = new SideBar({
     $target: $container,
     initialState,
     onClick,
   });
 
+  $container.appendChild($postEditContainer);
+
   const postForm = new PostForm({
-    $target: $container,
+    $target: $postEditContainer,
     initialState: {
       ...post,
     },
@@ -79,6 +85,13 @@ export default function PostEditPage({
         title,
       });
     }, 1500),
+  });
+
+  const subPosts = new SubPosts({
+    $target: $postEditContainer,
+    initialState: {
+      documents: [],
+    },
   });
 
   // id가 바뀔 때 페이지의 상태가 변화합니다!
@@ -99,11 +112,18 @@ export default function PostEditPage({
       post = await getPost(id, username);
     }
     postForm.setState(post);
+    subPosts.setState({
+      documents: this.state.documents,
+    });
     this.render();
   };
 
   this.render = () => {
-    if (!$target.querySelector('form')) postForm.render(); // 에디터의 경우 여기서 렌더링을 해줘야, setState할 때 다시 렌더링되지 않습니다.
+    if (!$target.querySelector('form')) {
+      postForm.render();
+      subPosts.render();
+    } // 에디터의 경우 여기서 렌더링을 해줘야, setState할 때 다시 렌더링되지 않습니다.
+    _renderChild($container, $postEditContainer, postEditContainer);
     _renderChild($page, $container, mainContainer);
     _renderChild($target, $page, postEditPage);
   };
