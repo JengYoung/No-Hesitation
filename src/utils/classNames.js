@@ -24,6 +24,7 @@ const names = {
   postBlock: 'post',
   headerBlock: 'header-container',
   postForm: 'post-form',
+  breadcrumb: 'breadcrumb',
 
   /* Element */
 
@@ -67,6 +68,10 @@ const names = {
   titleBox: 'post-form__title-box',
   postTitle: 'title-box__post-title',
   editor: 'post-form__editor',
+
+  // breadcrumb
+  breadcrumbLink: 'breadcrumb__link',
+  breadcrumbSeparator: 'breadcrumb__separator',
 
   // icon-size
   sz100: 'size-100',

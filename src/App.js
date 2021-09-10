@@ -11,6 +11,7 @@ export default function App({ $target }) {
     history.pushState(null, null, ROUTE_POST + `/${id}`);
     this.route();
   };
+
   const postEditPage = new PostEditPage({
     $target,
     initialState: {
@@ -55,5 +56,5 @@ export default function App({ $target }) {
 
   this.route();
 
-  router(async () => await this.route());
+  router(() => this.route());
 }

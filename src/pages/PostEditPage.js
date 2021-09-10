@@ -13,6 +13,8 @@ import { _createElemWithAttr, _renderChild } from '@/utils/customDOMMethods';
 import debounce from '@/utils/debounce';
 import { getItem, setItem } from '@/utils/storage';
 import SubPosts from '@/components/postEdit/SubPosts';
+import Breadcrumb from '@/components/postEdit/BreadCrumb';
+import { push } from '@/apis/router';
 /*
  this.state = {
     id: 'new',
@@ -66,6 +68,17 @@ export default function PostEditPage({
 
   $container.appendChild($postEditContainer);
 
+  const breadcrumb = new Breadcrumb({
+    $target: $postEditContainer,
+    initialState: {
+      id: this.state.id,
+      paths: [],
+    },
+    onClick: id => {
+      push(`/posts/${id}`);
+    },
+  });
+
   const postForm = new PostForm({
     $target: $postEditContainer,
     initialState: {
@@ -101,21 +114,26 @@ export default function PostEditPage({
       ...this.state,
       ...nextState,
     };
-    const { id, username } = this.state;
+    const { id, username, documents } = this.state;
+    const allDocuments = await getPostList(username);
     header.setState({ username });
     sideBar.setState({
       username,
-      documents: await getPostList(this.state.username),
+      documents: allDocuments,
     });
-
-    let post = getItem(getLocalPostKey(this.state.id), defaultValue);
+    let post = getItem(getLocalPostKey(id), defaultValue);
     if (id) {
       post = await getPost(id, username);
     }
+    breadcrumb.setState({
+      id,
+      paths: getFindParentNodesById(this.state.id, allDocuments),
+    });
     postForm.setState(post);
     subPosts.setState({
-      documents: this.state.documents,
+      documents,
     });
+
     this.render();
   };
 
@@ -126,6 +144,22 @@ export default function PostEditPage({
   };
 
   updateTitleDispatcher();
+
+  const getFindParentNodesById = (targetId, nodes) => {
+    const queue = [[nodes, []]];
+    while (queue.length) {
+      const [nowNode, paths] = queue.shift();
+      for (let i = 0; i < nowNode.length; i += 1) {
+        const { id, title, documents } = nowNode[i];
+        const nextPaths = [...paths, [id, title]];
+        if (id === targetId) {
+          return nextPaths;
+        }
+        queue.push([documents, nextPaths]);
+      }
+    }
+    return [];
+  };
 }
 
 const getLocalPostKey = postId => {
