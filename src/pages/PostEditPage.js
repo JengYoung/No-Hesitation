@@ -5,14 +5,14 @@ import {
   dispatchUpdateTitle,
   updateTitleDispatcher,
 } from '@/utils/customEvent';
-import Header from '@/components/Header';
-import PostForm from '@/components/PostForm';
-import SideBar from '@/components/SideBar';
+import Header from '@/components/common/Header';
+import PostForm from '@/components/postEdit/PostForm';
+import SideBar from '@/components/common/SideBar';
 import names from '@/utils/classNames';
 import { _createElemWithAttr, _renderChild } from '@/utils/customDOMMethods';
 import debounce from '@/utils/debounce';
 import { getItem, setItem } from '@/utils/storage';
-import SubPosts from '@/components/posts/SubPosts';
+import SubPosts from '@/components/postEdit/SubPosts';
 /*
  this.state = {
     id: 'new',

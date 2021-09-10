@@ -1,6 +1,6 @@
 import getPostList from '@/apis/route/post/getPostList';
-import Header from '@/components/Header';
-import SideBar from '@/components/SideBar';
+import Header from '@/components/common/Header';
+import SideBar from '@/components/common/SideBar';
 import names from '@/utils/classNames';
 import { _createElemWithAttr, _renderChild } from '@/utils/customDOMMethods';
 

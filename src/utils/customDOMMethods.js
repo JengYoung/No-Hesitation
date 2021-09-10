@@ -1,4 +1,4 @@
-import Post from '@/components/Post';
+import Post from '@/components/common/Post';
 import names from '@/utils/classNames';
 
 export const _createElemWithAttr = (
