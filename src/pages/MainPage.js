@@ -24,6 +24,7 @@ export default function MainPage({
       username: this.state.username,
     },
   });
+
   const sideBar = new SideBar({
     $target: $page,
     initialState,
@@ -39,6 +40,7 @@ export default function MainPage({
 
     const { username, documents } = this.state;
     header.setState({ username });
+
     sideBar.setState({
       username,
       documents,

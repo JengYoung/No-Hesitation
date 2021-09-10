@@ -1,0 +1,39 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  text-align: center;
+  &__text {
+    color: $red500;
+    font-size: 10rem;
+    font-weight: 700;
+    font-family: Open Sans Condensed, sans-serif;
+  }
+  &__content {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+  &__go-home-btn {
+    @include _button(white, $mint600, 12rem);
+    margin: 2rem auto;
+    font-size: 1.125rem;
+    font-weight: 700;
+    &:hover {
+      background: green;
+      color: white;
+    }
+  }
+  &__circle {
+    width: 20rem;
+    height: 20rem;
+    border-radius: 25rem;
+    background-color: white;
+    border: 0.5rem solid white;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

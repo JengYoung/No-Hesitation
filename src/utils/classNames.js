@@ -4,15 +4,22 @@ const names = {
   sharpIcon: 'material-icons-sharp',
 
   // Block
+  // pages
   page: 'page',
   mainPage: 'main-page',
   postEditPage: 'post-edit-page',
+  notFoundPage: 'not-found-page',
+
+  // container (component larger than block; surrounding block)
   container: 'container',
-  modalBlock: 'modal',
   mainContainer: 'main-container',
   sideBarContainer: 'sidebar-container',
   postEditContainer: 'post-edit-container',
   modalContainer: 'modal-container',
+  notFoundContainer: 'not-found',
+
+  // normal block
+  modalBlock: 'modal',
   postsBlock: 'posts',
   postBlock: 'post',
   headerBlock: 'header-container',
@@ -80,6 +87,12 @@ const names = {
 
   // sub-document
   subPostsBlock: 'sub-posts',
+
+  // not-found
+  notFoundHead: 'not-found__text',
+  notFoundContent: 'not-found__content',
+  notFoundGoHomeButton: 'not-found__go-home-btn',
+  notFoundCircle: 'not-found__circle',
 };
 
 export default names;

@@ -4,6 +4,7 @@ import PostEditPage from '@/pages/PostEditPage';
 import { ROUTE_POST } from '@/utils/constants';
 import { _removeAllChildNodes } from '@/utils/customDOMMethods';
 import getPost from '@/apis/route/post/getPost';
+import NotFoundPage from '@/pages/NotFoundPage';
 
 export default function App({ $target }) {
   const onClick = id => {
@@ -33,6 +34,10 @@ export default function App({ $target }) {
     onClick,
   });
 
+  const notFoundPage = new NotFoundPage({
+    $target,
+  });
+
   this.route = async () => {
     _removeAllChildNodes($target); // App 초기화
     const { pathname } = window.location;
@@ -43,6 +48,8 @@ export default function App({ $target }) {
     } else if (pathname.indexOf(ROUTE_POST + '/') === 0) {
       const postId = splitedPath[2];
       postEditPage.setState(await getPost(postId, 'jengyoung'));
+    } else {
+      notFoundPage.render();
     }
   };
 

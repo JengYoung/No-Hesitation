@@ -48,6 +48,8 @@ export default function Header({
     _renderChild($target, $header, headerBlock);
   };
 
+  this.render();
+
   $logoBox.addEventListener('click', () => {
     push('/');
   });

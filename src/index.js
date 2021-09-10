@@ -1,4 +1,8 @@
 import App from '@/App';
-new App({
-  $target: document.querySelector('#app'),
+
+document.addEventListener('DOMContentLoaded', () => {
+  // your code here
+  new App({
+    $target: document.querySelector('#app'),
+  });
 });
