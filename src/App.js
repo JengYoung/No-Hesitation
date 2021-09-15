@@ -22,6 +22,7 @@ export default function App({ $target }) {
       documents: [],
       createdAt: '',
       updatedAt: '',
+      isLoading: false,
     },
     onClick,
   });
@@ -48,7 +49,17 @@ export default function App({ $target }) {
       mainPage.setState();
     } else if (pathname.indexOf(ROUTE_POST + '/') === 0) {
       const postId = splitedPath[2];
-      postEditPage.setState(await getPost(postId, 'jengyoung'));
+
+      postEditPage.setState({
+        isLoading: true,
+      });
+
+      const post = await getPost(postId, 'jengyoung');
+
+      postEditPage.setState({
+        ...post,
+        isLoading: false,
+      });
     } else {
       notFoundPage.render();
     }

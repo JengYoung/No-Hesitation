@@ -1,5 +1,6 @@
 import getPostList from '@/apis/route/post/getPostList';
 import Header from '@/components/common/Header';
+import Loading from '@/components/common/Loading';
 import SideBar from '@/components/common/SideBar';
 import names from '@/utils/classNames';
 import { _createElemWithAttr, _renderChild } from '@/utils/customDOMMethods';
@@ -18,6 +19,12 @@ export default function MainPage({
   const { mainPage } = names;
   this.state = initialState;
   const $page = _createElemWithAttr('div', [mainPage]);
+  $target.appendChild($page);
+
+  const loading = new Loading({
+    $target: $page,
+  });
+
   const header = new Header({
     $target: $page,
     initialState: {
@@ -26,12 +33,14 @@ export default function MainPage({
   });
 
   const sideBar = new SideBar({
+    isLoading: false,
     $target: $page,
     initialState,
     onClick,
   });
 
   this.setState = async () => {
+    loading.setState(true);
     const posts = await getPostList(this.state.username);
     this.state = {
       ...this.state,
@@ -45,6 +54,7 @@ export default function MainPage({
       username,
       documents,
     });
+    loading.setState(false);
 
     this.render();
   };

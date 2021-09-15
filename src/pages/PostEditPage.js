@@ -62,7 +62,11 @@ export default function PostEditPage({
 
   const sideBar = new SideBar({
     $target: $container,
-    initialState,
+    initialState: {
+      username: this.state.username,
+      documents: [],
+      isLoading: false,
+    },
     onClick,
   });
 

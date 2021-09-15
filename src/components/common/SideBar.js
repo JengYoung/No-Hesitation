@@ -18,6 +18,7 @@ import {
   MODAL_DELETE_QUESTION,
 } from '@/utils/constants';
 import { clickPosts, togglePosts } from '@/utils/customEvent';
+import Loading from '@/components/common/Loading';
 
 /*
   {
@@ -31,6 +32,7 @@ export default function SideBar({ $target, initialState, onClick }) {
     sideBarContainer,
     postsItem,
     postsBlock,
+    sideBarSpacer,
     sideBarItem,
     sideBarButtonBox,
     sideBarCreatePostBtn,
@@ -41,6 +43,11 @@ export default function SideBar({ $target, initialState, onClick }) {
   } = names;
 
   const $sideBar = _createElemWithAttr('nav', [sideBarContainer]);
+  $target.appendChild($sideBar);
+  const $spacer = _createElemWithAttr('div', [sideBarSpacer]);
+  const loading = new Loading({
+    $target: $sideBar,
+  });
   const $posts = _createElemWithAttr('section', [sideBarItem, postsBlock]);
   this.state = initialState;
 
@@ -56,20 +63,28 @@ export default function SideBar({ $target, initialState, onClick }) {
   $sideBar.appendChild($sideBarButtonBox);
 
   this.setState = nextState => {
-    if (!checkState(this.state, nextState)) {
-      _removeAllChildNodes($posts);
-      this.state = nextState;
-      const $fragment = new DocumentFragment();
-      _renderPosts($fragment, this.state.documents);
-      $posts.appendChild($fragment);
-      this.render();
-    }
+    if (checkState(this.state, nextState)) return;
+    _removeAllChildNodes($posts);
+
+    this.state = {
+      ...this.state,
+      ...nextState,
+    };
+
+    const $fragment = new DocumentFragment();
+    _renderPosts($fragment, this.state.documents);
+    $posts.appendChild($fragment);
+
+    loading.setState(this.state.isLoading);
+    this.render();
   };
 
   this.render = () => {
     _renderChild($sideBar, $posts, sideBarItem);
     _renderChild($target, $sideBar, sideBarContainer);
+    _renderChild($target, $spacer, sideBarSpacer);
   };
+
   this.render();
 
   // click post
@@ -104,10 +119,17 @@ export default function SideBar({ $target, initialState, onClick }) {
       head: MODAL_DELETE_QUESTION,
       isInput: false,
       tryFunc: async () => {
+        if (this.state.isLoading) return;
+        this.setState({
+          ...this.state,
+          isLoading: true,
+        });
         await deletePost(this.state.username, closestPostsItem.dataset.id);
         const posts = await getPostList(this.state.username);
         this.setState({
+          ...this.state,
           documents: posts,
+          isLoading: false,
         });
       },
     });
@@ -124,11 +146,21 @@ export default function SideBar({ $target, initialState, onClick }) {
       head: INPUT_TITLE_MESSAGE,
       isInput: true,
       tryFunc: async title => {
+        if (this.state.isLoading) return;
+        this.setState({
+          ...this.state,
+          isLoading: true,
+        });
+
         const result = await createPost(this.state.username, {
           title,
           parent: $elem?.dataset.id ?? null,
         });
         push(`/posts/${result.id}`);
+        this.setState({
+          ...this.state,
+          isLoading: false,
+        });
       },
     });
   };

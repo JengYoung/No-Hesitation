@@ -14,12 +14,14 @@ const names = {
   container: 'container',
   mainContainer: 'main-container',
   sideBarContainer: 'sidebar-container',
+  sideBarSpacer: 'sidebar-spacer',
   postEditContainer: 'post-edit-container',
   modalContainer: 'modal-container',
   notFoundContainer: 'not-found',
 
   // normal block
   modalBlock: 'modal',
+  loadingBlock: 'loading',
   postsBlock: 'posts',
   postBlock: 'post',
   headerBlock: 'header-container',
