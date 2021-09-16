@@ -1,0 +1,18 @@
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  &__link {
+    display: flex;
+    margin-right: 0.5rem;
+    list-style: none;
+    &::before {
+      content: "/";
+      font-weight: 700;
+      margin-right: 0.5rem;
+    }
+    &:hover {
+      cursor: pointer;
+      color: $mint500;
+    }
+  }
+}
