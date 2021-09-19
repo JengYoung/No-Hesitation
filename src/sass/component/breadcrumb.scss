@@ -10,7 +10,7 @@
       font-weight: 700;
       margin-right: 0.5rem;
     }
-    &:hover {
+    &:hover:not(.breadcrumb__link--disable) {
       cursor: pointer;
       color: $mint500;
     }

@@ -38,7 +38,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "dev:client": "webpack-dev-server --mode development --env client ",
+    "dev:client": "webpack serve --open --mode development --env client ",
     "build": "webpack --mode production"
   },
   "repository": {

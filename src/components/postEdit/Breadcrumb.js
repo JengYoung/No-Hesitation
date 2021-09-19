@@ -7,7 +7,13 @@ import {
 
 export default function Breadcrumb({ $target, initialState, onClick }) {
   this.state = initialState;
-  const { breadcrumb, breadcrumbLink, breadcrumbSeparator } = names;
+  const {
+    breadcrumb,
+    breadcrumbLink,
+    breadcrumbSeparator,
+    cnBreadcrumbTitle,
+    cnDisable,
+  } = names;
 
   const $breadcrumb = _createElemWithAttr('ul', [breadcrumb]);
 
@@ -22,9 +28,17 @@ export default function Breadcrumb({ $target, initialState, onClick }) {
   this.render = () => {
     _removeAllChildNodes($breadcrumb);
     const $fragment = new DocumentFragment();
+    const pathsLength = this.state.paths.length;
     this.state.paths.map(([id, title], idx) => {
-      const $breadcrumbLink = _createElemWithAttr('li', [breadcrumbLink]);
-      const $breadcrumbtitle = _createElemWithAttr('div', [], title);
+      const $breadcrumbLink = _createElemWithAttr('li', [
+        breadcrumbLink,
+        ...(idx === pathsLength - 1 ? [`${breadcrumbLink}${cnDisable}`] : []),
+      ]);
+      const $breadcrumbtitle = _createElemWithAttr(
+        'div',
+        [cnBreadcrumbTitle],
+        title,
+      );
       $breadcrumbLink.dataset.id = id;
       $breadcrumbLink.appendChild($breadcrumbtitle);
       $fragment.appendChild($breadcrumbLink);
@@ -46,7 +60,11 @@ export default function Breadcrumb({ $target, initialState, onClick }) {
 
   $breadcrumb.addEventListener('click', e => {
     const closestBreadcrumbLink = e.target.closest(`.${breadcrumbLink}`);
-    if (!closestBreadcrumbLink) return;
+    if (
+      !closestBreadcrumbLink ||
+      closestBreadcrumbLink.dataset.id === this.state.id.toString()
+    )
+      return;
     onClick(closestBreadcrumbLink.dataset.id);
   });
 }

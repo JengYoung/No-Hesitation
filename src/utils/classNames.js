@@ -73,6 +73,7 @@ const names = {
 
   // breadcrumb
   breadcrumbLink: 'breadcrumb__link',
+  cnBreadcrumbTitle: 'breadcrumb__title',
   breadcrumbSeparator: 'breadcrumb__separator',
 
   // icon-size
@@ -100,6 +101,8 @@ const names = {
   notFoundContent: 'not-found__content',
   notFoundGoHomeButton: 'not-found__go-home-btn',
   notFoundCircle: 'not-found__circle',
+
+  cnDisable: '--disable',
 };
 
 export default names;
