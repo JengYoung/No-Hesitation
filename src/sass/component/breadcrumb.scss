@@ -3,16 +3,13 @@
   flex-wrap: wrap;
   &__link {
     display: flex;
-    margin-right: 0.5rem;
     list-style: none;
-    &::before {
-      content: "/";
-      font-weight: 700;
-      margin-right: 0.5rem;
-    }
     &:hover:not(.breadcrumb__link--disable) {
       cursor: pointer;
       color: $mint500;
     }
+  }
+  &__separator {
+    margin: 0 0.5rem;
   }
 }

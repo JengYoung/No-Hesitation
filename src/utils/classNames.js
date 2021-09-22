@@ -74,7 +74,7 @@ const names = {
   // breadcrumb
   breadcrumbLink: 'breadcrumb__link',
   cnBreadcrumbTitle: 'breadcrumb__title',
-  breadcrumbSeparator: 'breadcrumb__separator',
+  cnBreadcrumbSeparator: 'breadcrumb__separator',
 
   // icon-size
   sz100: 'size-100',
@@ -102,6 +102,7 @@ const names = {
   notFoundGoHomeButton: 'not-found__go-home-btn',
   notFoundCircle: 'not-found__circle',
 
+  //etc
   cnDisable: '--disable',
 };
 

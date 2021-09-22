@@ -67,6 +67,7 @@
         margin-left: auto;
         .post__create-btn,
         .post__remove-btn {
+          font-weight: 200;
           &:hover {
             color:  $red300;
           }

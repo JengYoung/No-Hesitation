@@ -10,7 +10,7 @@ export default function Breadcrumb({ $target, initialState, onClick }) {
   const {
     breadcrumb,
     breadcrumbLink,
-    breadcrumbSeparator,
+    cnBreadcrumbSeparator,
     cnBreadcrumbTitle,
     cnDisable,
   } = names;
@@ -43,11 +43,12 @@ export default function Breadcrumb({ $target, initialState, onClick }) {
       $breadcrumbLink.appendChild($breadcrumbtitle);
       $fragment.appendChild($breadcrumbLink);
 
-      if (idx !== this.state.paths.length) {
-        const $breadcrumbSeparator = _createElemWithAttr('div', [
-          breadcrumbSeparator,
+      if (idx !== this.state.paths.length - 1) {
+        const $breadcrumbSeparator = _createElemWithAttr(
+          'div',
+          [cnBreadcrumbSeparator],
           '/',
-        ]);
+        );
         $fragment.appendChild($breadcrumbSeparator);
       }
     });
