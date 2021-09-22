@@ -25,11 +25,16 @@ export const _removeAllChildNodes = node => {
   }
 };
 
-export const _renderPosts = ($parentNode, nowDocuments, isSidebar = true) => {
+export const _renderPosts = (
+  $parentNode,
+  nowDocuments,
+  depth = 0,
+  isSidebar = true,
+) => {
   const {
     outlinedIcon,
     addIcon,
-    sz150,
+    sz125,
     postNextNewText,
     postNextNew,
     postNextNewIcon,
@@ -37,10 +42,9 @@ export const _renderPosts = ($parentNode, nowDocuments, isSidebar = true) => {
 
   if (!nowDocuments.length && isSidebar) {
     const $postNextNew = _createElemWithAttr('div', [postNextNew]);
-
     const $postNewIcon = _createElemWithAttr(
       'span',
-      [outlinedIcon, sz150, postNextNewIcon],
+      [outlinedIcon, sz125, postNextNewIcon],
       addIcon,
     );
 
@@ -49,6 +53,7 @@ export const _renderPosts = ($parentNode, nowDocuments, isSidebar = true) => {
       [postNextNewText],
       '빈 페이지',
     );
+    $postNextNew.style.cssText = `padding-left: ${depth + 0.5}rem`;
 
     _appendChilds($postNextNew, $postNewIcon, $postNextNewText);
     _appendChilds($parentNode, $postNextNew);
@@ -62,11 +67,12 @@ export const _renderPosts = ($parentNode, nowDocuments, isSidebar = true) => {
       initialState: {
         id,
         title,
+        depth,
       },
       isSidebar,
     });
 
-    _renderPosts(post.$postNext, nextDocs, isSidebar);
+    _renderPosts(post.$postNext, nextDocs, depth + 1, isSidebar);
   });
 };
 
