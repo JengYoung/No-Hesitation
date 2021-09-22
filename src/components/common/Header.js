@@ -16,9 +16,17 @@ export default function Header({
   this.state = initialState; // 아직은 로그인, 로그아웃 기능을 구현하지 않았네요...!
 
   const { LOGO_URL } = process.env;
-  const { headerBlock, logo, logoBox, userInfo, usernameMark, nameLogo } =
-    names;
+  const {
+    headerBlock,
+    logo,
+    logoBox,
+    userInfo,
+    usernameMark,
+    nameLogo,
+    cnHeaderSpacer,
+  } = names;
   const $header = _createElemWithAttr('header', [headerBlock]);
+  const $headerSpacer = _createElemWithAttr('div', [cnHeaderSpacer]);
   const $userOptionBox = _createElemWithAttr('div', [userInfo]);
   const $usernameMark = _createElemWithAttr(
     'span',
@@ -28,6 +36,9 @@ export default function Header({
   const $logoBox = _createElemWithAttr('div', [logoBox]);
   const $logo = _createElemWithAttr('img', [logo]);
   const $nameLogo = _createElemWithAttr('span', [nameLogo], 'no#tation');
+  const $fragment = new DocumentFragment();
+  _appendChilds($fragment, $header, $headerSpacer);
+  _appendChilds($target, $fragment);
   $logo.setAttribute('src', LOGO_URL);
 
   _appendChilds($logoBox, $logo, $nameLogo);
@@ -46,6 +57,8 @@ export default function Header({
 
   this.render = () => {
     _renderChild($target, $header, headerBlock);
+    _renderChild($target, $headerSpacer, cnHeaderSpacer);
+    // _renderChild($target, $header, headerBlock);
   };
 
   this.render();

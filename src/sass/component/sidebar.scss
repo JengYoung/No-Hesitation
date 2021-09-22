@@ -1,6 +1,7 @@
 @import "@/sass/_variables";
 
 .sidebar-spacer {
+  left: 0;
   top: $headerHeight;
   width: 300px;
   height: calc(100vh - #{$headerHeight});
@@ -28,7 +29,6 @@
     }
   }
   .sidebar__item.posts {
-    width: 100%;
     .post {
       display: flex;
       align-items: center;

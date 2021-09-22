@@ -35,6 +35,7 @@ const names = {
   logo: 'logo-box__logo',
   nameLogo: 'logo-box__name-logo',
   userInfo: 'header__user-info',
+  cnHeaderSpacer: 'header__spacer',
 
   //modal
   usernameMark: 'user-info__username-mark',

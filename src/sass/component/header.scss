@@ -1,8 +1,10 @@
 .header-container {
+  display: flex;
+  position: fixed;
+  align-items: center;
   width: 100%;
   height: $headerHeight;
-  display: flex;
-  align-items: center;
+  background-color: white;
   box-shadow: 0px 0px 4px 1px rgba(0,0,0,0.2);
   .header__user-info {
     position: relative;
@@ -34,4 +36,7 @@
       font-family: 'Lobster', cursive;
     }
   }
+}
+.header__spacer {
+  height: $headerHeight;
 }
