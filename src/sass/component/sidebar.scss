@@ -15,6 +15,20 @@
   overflow-y: scroll;
   background: $mint100;
   box-sizing: border-box;
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    background-color: $gray200;
+  }
+  &::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+  }
   .sidebar__btn-box {
     display: flex;
     justify-content: center;
