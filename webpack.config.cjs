@@ -1,5 +1,5 @@
 const path = require('path');
-const HtmlPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
@@ -61,7 +61,7 @@ module.exports = env => ({
       {
         test: /\.s?css$/,
         use: [
-          'style-loader', // creates style nodes from JS strings
+          MiniCssExtractPlugin.loader,
           'css-loader', // translates CSS into CommonJS
           'sass-loader', // compiles Sass to CSS, using Node Sass by default
         ],
@@ -73,9 +73,10 @@ module.exports = env => ({
     new Dotenv({
       path: `${env.client ? 'client' : 'server'}.env`,
     }),
-    new HtmlPlugin({
+    new HtmlWebpackPlugin({
       template: './index.html',
       hash: true,
+      favicon: './src/assets/logo.png',
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({ filename: 'css/style.css' }),

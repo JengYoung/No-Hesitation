@@ -27,5 +27,7 @@
   &__editor {
     width: calc(70vw - 300px);
     margin: 0 auto;
+    padding-bottom: 100%;
+    border-bottom: 1px solid lightgray;
   }
 };

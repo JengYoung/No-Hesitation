@@ -53,7 +53,7 @@ export const _renderPosts = (
       [postNextNewText],
       '빈 페이지',
     );
-    $postNextNew.style.cssText = `padding-left: ${depth + 0.5}rem`;
+    $postNextNew.style.cssText = `padding-left: ${depth + 0.75}rem`;
 
     _appendChilds($postNextNew, $postNewIcon, $postNextNewText);
     _appendChilds($parentNode, $postNextNew);
